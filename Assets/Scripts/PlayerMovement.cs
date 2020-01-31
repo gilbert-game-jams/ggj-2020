@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     }
  
      void Update() {
-        Debug.Log(Input.GetAxis("Mouse Y") * speed);
         transform.Rotate(new Vector3(-Input.GetAxis("Mouse Y") * speed, Input.GetAxis("Mouse X") * speed, 0));
         X = transform.rotation.eulerAngles.x;
         Y = transform.rotation.eulerAngles.y;
