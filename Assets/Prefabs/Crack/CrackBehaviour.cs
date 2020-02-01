@@ -58,13 +58,19 @@ public class CrackBehaviour : MonoBehaviour
         SetCrackState(CrackState.Broken);
     }
 
-    public bool IsTaken()
+    public bool CanTake()
     {
-        return Taken;
+        bool canTake = _crackState == CrackState.Repaired && !Taken ? true :false;
+        return canTake;
     }
 
     public void Take()
     {
         Taken = true;
+    }
+
+    public void GiveBack()
+    {
+        Taken = false;
     }
 }
