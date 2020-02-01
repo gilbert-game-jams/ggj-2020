@@ -23,7 +23,17 @@ public class Chef : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+    }
 
+    private void FixedUpdate()
+    {
+        float minDistance = 0.1f;
+        Vector3 deltaPos = TargetTest.position - transform.position;
+        if (minDistance * minDistance < deltaPos.sqrMagnitude)
+        {
+            GoHome();
+        }
     }
 
     void GoToTarget(Transform _target)
