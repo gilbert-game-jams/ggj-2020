@@ -14,8 +14,12 @@ public class Chef : MonoBehaviour
     NavMeshAgent NavAgent;
     CrackBehaviour Crack;
     Vector3 PatrolWaypoint = Vector3.zero;
-    enum ChefState {GoToTarget, GoHome,Patrol};
+    enum ChefState {GoToTarget, GoHome,Patrol, Eat};
     ChefState state = ChefState.GoToTarget;
+
+    [SerializeField]
+    float TimeToEat = 5;
+    float EatTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -42,8 +46,7 @@ public class Chef : MonoBehaviour
         }
         if(!ReachedTarget(Crack.transform.position))
         return;
-        Crack.UndoRepair();
-           ChangeState(ChefState.Patrol);
+           ChangeState(ChefState.Eat);
          break;
            
            case ChefState.Patrol:
@@ -64,7 +67,22 @@ public class Chef : MonoBehaviour
                 NavAgent.SetDestination(PatrolWaypoint);
              }
            break;
+            case ChefState.Eat:
 
+            if(!Crack.gameObject.activeSelf)
+            {
+                NavAgent.isStopped = false;
+                ChangeState(ChefState.Patrol);
+                return;
+            }
+
+            if(EatTimer < Time.time)
+            {
+                Crack.UndoRepair();
+                NavAgent.isStopped = false;
+                ChangeState(ChefState.Patrol);
+            } 
+            break;
         }
 
         
@@ -88,6 +106,11 @@ public class Chef : MonoBehaviour
             PatrolWaypoint = crackManager.GetPatrolPoint();
             NavAgent.SetDestination(PatrolWaypoint);
             state = ChefState.Patrol;
+            break;
+            case ChefState.Eat:
+            NavAgent.isStopped = true;
+            EatTimer = Time.time  + TimeToEat;
+            state = ChefState.Eat;
             break;
         }
     }
