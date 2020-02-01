@@ -1,41 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class BowBehaviour : MonoBehaviour
 {
+    public Animator _animator;
     [FMODUnity.EventRef] public string shootNoodleEvent;
-    private FMOD.Studio.EventInstance shootNoodleInstance;
-    private bool drawingBow;
-
+    private FMOD.Studio.EventInstance shootNoodleSoundEvent;
 
     public GameObject _arrow;
     public GameObject _arrowSpawn;
-    public Slider _slider;
 
 
     [Range(1, 50f)]
-    public float _minimumArrowSpeed = 5f;
+    public float _minArrowSpeed = 5f;
 
     [Range(1, 50f)]
-    public float _maximumArrowSpeed = 10f;
+    public float _maxArrowSpeed = 10f;
+    
+    [Range(0.1f, 50f)]
+    public float _maxDrawTime = 2f;
     
     [Range(0.1f, 10f)]
-    public float _maximumDrawTime = 2f;
+    public float _reloadTime = 1f;
 
     float _drawTime = 0.0f;
     float _drawFactor = 0.0f;
+    float _timeSinceArrowFired = 0.0f;
+    enum AnimationState { Idle = 1, Shooting = 2, Drawing = 4}
+    GameObject _loadedArrow;
+    AnimationState _animationState = AnimationState.Idle;
 
     private void OnValidate() 
     {
-        _maximumArrowSpeed = _minimumArrowSpeed > _maximumArrowSpeed ? _minimumArrowSpeed : _maximumArrowSpeed;
+        _maxArrowSpeed = _minArrowSpeed > _maxArrowSpeed ? _minArrowSpeed : _maxArrowSpeed;
     }
 
     private void Awake() {
-        var arrow = SpawnArrow(_arrowSpawn);
-        arrow.transform.parent = _arrowSpawn.transform;
-        arrow.GetComponent<Rigidbody>().isKinematic = true;
+        LoadArrow();
+        shootNoodleSoundEvent = FMODUnity.RuntimeManager.CreateInstance(shootNoodleEvent);
     }
 
     float GetArrowSpeed(float minSpeed, float maxSpeed, float draw) {
@@ -44,46 +50,86 @@ public class BowBehaviour : MonoBehaviour
     }
 
     GameObject SpawnArrow(GameObject spawnObject) {
-        return GameObject.Instantiate(_arrow, spawnObject.transform.position, spawnObject.transform.rotation);
+        var arrow = GameObject.Instantiate(_arrow, spawnObject.transform.position, spawnObject.transform.rotation);
+        var arrowSpawnTrans = _arrowSpawn.transform;
+        arrow.transform.LookAt(arrowSpawnTrans.position - arrowSpawnTrans.forward, arrowSpawnTrans.up);
+        return arrow;
+    }
+
+    void LoadArrow()
+    {
+        _loadedArrow = SpawnArrow(_arrowSpawn);
+        _loadedArrow.transform.parent = _arrowSpawn.transform;
+        _loadedArrow.GetComponent<Rigidbody>().useGravity = false;
     }
 
     void FireArrow(float drawFactor, float maxSpeed)
     {
-        shootNoodleInstance.setParameterValue("BowChargeRelease", 1);
-
-        var arrow = SpawnArrow(_arrowSpawn);
-
-        // arrow.GetComponent<Rigidbody>().velocity = -transform.right * GetArrowSpeed(_minimumArrowSpeed, _maximumArrowSpeed, drawFactor);
-        arrow.GetComponent<Rigidbody>().velocity = -_arrowSpawn.transform.right * GetArrowSpeed(_minimumArrowSpeed, _maximumArrowSpeed, drawFactor);
-        
+        Debug.Log("Fire");
+        shootNoodleSoundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        shootNoodleSoundEvent.setParameterValue("BowChargeRelease", 1);
         var arrowSpawnTrans = _arrowSpawn.transform;
-        arrow.transform.LookAt(arrowSpawnTrans.position + arrowSpawnTrans.forward, arrowSpawnTrans.up);
-    }
 
+        _loadedArrow.GetComponent<Rigidbody>().useGravity = true;
+        _loadedArrow.transform.parent = null;
+        _loadedArrow.GetComponent<Rigidbody>().velocity = arrowSpawnTrans.forward * GetArrowSpeed(_minArrowSpeed, _maxArrowSpeed, drawFactor);
+        _loadedArrow = null;
+    }
+    
     void ResetDraw() {
         _drawFactor = 0.0f;
         _drawTime = 0.0f;
     }
 
-    // Update is called once per frame
+    void HandleAnimation(AnimationState state) 
+    {
+        _animator.speed = 1f;
+        switch (state) {
+            case AnimationState.Drawing:
+                var aimClipLength = 0.23f;
+                var drawSpeed =  aimClipLength / _maxDrawTime;
+                _animator.speed = drawSpeed;
+                _animator.SetBool("Aiming", true);
+                
+                break;
+            case AnimationState.Shooting:
+                _animator.SetTrigger("Shooting");
+                _animator.SetBool("Aiming", false);
+                break;
+            case AnimationState.Idle:
+                _animator.SetBool("Aiming", false);
+                break;
+        }
+        Debug.Log(_animator.speed);
+    }
+
     void Update()
     {
-        if (Input.GetMouseButtonUp(0)) 
+        _timeSinceArrowFired += Time.deltaTime;
+        if (Input.GetMouseButtonUp(0) && _loadedArrow != null) 
         {
-            FireArrow(_drawFactor, _maximumArrowSpeed);
+            FireArrow(_drawFactor, _maxArrowSpeed);
             ResetDraw();
-            drawingBow = false;
-        } else if (Input.GetMouseButton(0)) {
-            if (!drawingBow)
-            {
-                shootNoodleInstance = FMODUnity.RuntimeManager.CreateInstance(shootNoodleEvent);
-                shootNoodleInstance.start();
-                shootNoodleInstance.setParameterValue("BowChargeRelease", 0);
-            }
-            drawingBow = true;
-            _drawTime = _drawTime < _maximumDrawTime ? _drawTime + Time.deltaTime : _maximumDrawTime;
-            _drawFactor = _drawTime / _maximumDrawTime;
+            _animationState = AnimationState.Shooting;
+            _timeSinceArrowFired = 0.0f;
+        } 
+        else if(Input.GetMouseButtonDown(1)) {
+            shootNoodleSoundEvent.start();
+            shootNoodleSoundEvent.setParameterValue("BowChargeRelease", 0);
+        } 
+        else if (Input.GetMouseButton(1)) {
+            _animationState = AnimationState.Drawing;
+            _drawTime = _drawTime < _maxDrawTime ? _drawTime + Time.deltaTime : _maxDrawTime;
+            _drawFactor = _drawTime / _maxDrawTime;
+        } else if(Input.GetMouseButtonUp(1)) {
+            _animationState = AnimationState.Idle;
+            shootNoodleSoundEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
-        _slider.value = _drawFactor;
+
+        if(_loadedArrow == null && _animationState != AnimationState.Shooting && _timeSinceArrowFired > _reloadTime) {
+            LoadArrow();
+        }
+
+        HandleAnimation(_animationState);
     }
 }

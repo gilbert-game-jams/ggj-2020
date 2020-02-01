@@ -188,21 +188,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.001
       objectReference: {fileID: 0}
-    - target: {fileID: 2583133888967986810, guid: 72da5f240745b8a48aad59b6c18a1d5f,
+    - target: {fileID: 8110410048688504664, guid: 72da5f240745b8a48aad59b6c18a1d5f,
         type: 3}
       propertyPath: _slider
       value: 
-      objectReference: {fileID: 649406404}
-    - target: {fileID: 6062470354763561842, guid: 72da5f240745b8a48aad59b6c18a1d5f,
+      objectReference: {fileID: 0}
+    - target: {fileID: 8110410048688504664, guid: 72da5f240745b8a48aad59b6c18a1d5f,
         type: 3}
-      propertyPath: _arrowSpawn
-      value: 
-      objectReference: {fileID: 1810904990}
-    - target: {fileID: 6062470354763561842, guid: 72da5f240745b8a48aad59b6c18a1d5f,
+      propertyPath: _maximumArrowSpeed
+      value: 15.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8110410048688504664, guid: 72da5f240745b8a48aad59b6c18a1d5f,
         type: 3}
-      propertyPath: _slider
-      value: 
-      objectReference: {fileID: 649406404}
+      propertyPath: _maximumDrawTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8110410048688504664, guid: 72da5f240745b8a48aad59b6c18a1d5f,
+        type: 3}
+      propertyPath: _maxDrawTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72da5f240745b8a48aad59b6c18a1d5f, type: 3}
 --- !u!1 &265497011
@@ -330,18 +335,6 @@ Transform:
   m_Father: {fileID: 573888108}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &649406404 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6384694693746947829, guid: 2202af6ac7fa6f94f801acd9d92c090e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1891556231}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &743064060 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: f565202a737c3de4cb95b03ff2f1a640,
@@ -570,12 +563,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f565202a737c3de4cb95b03ff2f1a640, type: 3}
---- !u!1 &1810904990 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3853026322488329009, guid: 72da5f240745b8a48aad59b6c18a1d5f,
-    type: 3}
-  m_PrefabInstance: {fileID: 37861746}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1847340766
 GameObject:
   m_ObjectHideFlags: 19
