@@ -7,7 +7,7 @@ public class SpawnCracks : MonoBehaviour
     [Header ("Insertables")]
     public GameObject crackPrefab = null;
     public Renderer myRenderer = null;
-    public float zOffset;
+    public float xOffset = 3.86f;
 
     [Header ("Changable Stats")]
     public float secondsBetweenEachCrackSpawn;
@@ -81,7 +81,6 @@ public class SpawnCracks : MonoBehaviour
         
     }
 
-    public float xOffset = 3.86f;
     private void RandomizeSpawnLocation()
     {
         Debug.Log(myRenderer.bounds.size.z);
