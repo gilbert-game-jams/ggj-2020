@@ -5,11 +5,16 @@ using UnityEngine.UI;
 
 public class BowBehaviour : MonoBehaviour
 {
+    [FMODUnity.EventRef] public string shootNoodleEvent;
+    private FMOD.Studio.EventInstance shootNoodleInstance;
+    private bool drawingBow;
+
+
     public GameObject _arrow;
     public GameObject _arrowSpawn;
     public Slider _slider;
-    
-    
+
+
     [Range(1, 50f)]
     public float _minimumArrowSpeed = 5f;
 
@@ -34,6 +39,8 @@ public class BowBehaviour : MonoBehaviour
 
     void FireArrow(float drawFactor, float maxSpeed)
     {
+        shootNoodleInstance.setParameterValue("BowChargeRelease", 1);
+
         var arrow = GameObject.Instantiate(_arrow, _arrowSpawn.transform.position, _arrow.transform.rotation);
 
         // arrow.GetComponent<Rigidbody>().velocity = -transform.forward * maxSpeed * drawFactor;
@@ -55,7 +62,15 @@ public class BowBehaviour : MonoBehaviour
         {
             FireArrow(_drawFactor, _maximumArrowSpeed);
             ResetDraw();
+            drawingBow = false;
         } else if (Input.GetMouseButton(0)) {
+            if (!drawingBow)
+            {
+                shootNoodleInstance = FMODUnity.RuntimeManager.CreateInstance(shootNoodleEvent);
+                shootNoodleInstance.start();
+                shootNoodleInstance.setParameterValue("BowChargeRelease", 0);
+            }
+            drawingBow = true;
             _drawTime = _drawTime < _maximumDrawTime ? _drawTime + Time.deltaTime : _maximumDrawTime;
             _drawFactor = _drawTime / _maximumDrawTime;
         }
