@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{a640c99b-1715-4869-b2df-cc2d71b1f98c}">
+        <property name="assetPath">
+            <value>explosion_underwater_blast_04.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>96</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>4.8663958333333337</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{d6c75463-ba8f-4b87-936d-948e3370effe}</destination>
+        </relationship>
+    </object>
+</objects>
