@@ -128,5 +128,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6423486ac5d38134e9cd18f08d7eb512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HomeTransform: {fileID: 0}
   TargetTest: {fileID: 0}
+  HomeTransform: {fileID: 0}

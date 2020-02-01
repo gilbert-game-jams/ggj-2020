@@ -8,7 +8,6 @@ public class CrackBehaviour : MonoBehaviour
 
     public GameObject _fixedCrack;
     public GameObject _brokenCrack;
-    bool Taken = false;
     
     [Range(0f, 30f)]
     public float _timeUntilDespawn = 5.0f;
@@ -26,7 +25,6 @@ public class CrackBehaviour : MonoBehaviour
             case CrackState.Broken:
                 _fixedCrack.SetActive(false);
                 _brokenCrack.SetActive(true);
-                Taken = false;
                 break;
             case CrackState.Repaired:
                 _fixedCrack.SetActive(true);
@@ -56,15 +54,5 @@ public class CrackBehaviour : MonoBehaviour
     public void UndoRepair()
     {
         SetCrackState(CrackState.Broken);
-    }
-
-    public bool IsTaken()
-    {
-        return Taken;
-    }
-
-    public void Take()
-    {
-        Taken = true;
     }
 }
