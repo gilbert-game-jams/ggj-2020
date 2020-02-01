@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class BowBehaviour : MonoBehaviour
 {
-    [FMODUnity.EventRef] 
-    public string shootNoodleEvent;
-    public Animator _animator;
+    [FMODUnity.EventRef] public string shootNoodleEvent;
+    private FMOD.Studio.EventInstance shootNoodleInstance;
+    private bool drawingBow;
+
+
     public GameObject _arrow;
     public GameObject _arrowSpawn;
     public Slider _slider;
+
 
     [Range(1, 50f)]
     public float _minimumArrowSpeed = 5f;
@@ -20,15 +23,9 @@ public class BowBehaviour : MonoBehaviour
     
     [Range(0.1f, 10f)]
     public float _maximumDrawTime = 2f;
-    
 
-    // Private variables
-    enum ShootingState { Drawing, Shooting, Idle };
-    ShootingState _shootingState = ShootingState.Idle;
-    bool drawingBow;
     float _drawTime = 0.0f;
     float _drawFactor = 0.0f;
-    FMOD.Studio.EventInstance shootNoodleInstance;
 
     private void OnValidate() 
     {
@@ -68,35 +65,15 @@ public class BowBehaviour : MonoBehaviour
         _drawTime = 0.0f;
     }
 
-    void HandleAnimations(ShootingState shootingState) {
-        Debug.Log(shootingState);
-        switch(shootingState) {
-            case ShootingState.Drawing:
-                _animator.SetBool("Aiming", true);
-                break;
-            case ShootingState.Shooting:
-                _animator.SetTrigger("Shoot");
-                break;
-            case ShootingState.Idle:
-                _animator.SetBool("Aiming", false);
-                break;
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetMouseButtonUp(0)) 
         {
             FireArrow(_drawFactor, _maximumArrowSpeed);
             ResetDraw();
-
-            _shootingState = ShootingState.Shooting;
             drawingBow = false;
-        }      
-        else if (Input.GetMouseButton(0)) {
-            _shootingState = ShootingState.Drawing;
+        } else if (Input.GetMouseButton(0)) {
             if (!drawingBow)
             {
                 shootNoodleInstance = FMODUnity.RuntimeManager.CreateInstance(shootNoodleEvent);
@@ -107,11 +84,6 @@ public class BowBehaviour : MonoBehaviour
             _drawTime = _drawTime < _maximumDrawTime ? _drawTime + Time.deltaTime : _maximumDrawTime;
             _drawFactor = _drawTime / _maximumDrawTime;
         }
-        else {
-            _shootingState = ShootingState.Idle;
-        }
         _slider.value = _drawFactor;
-
-        HandleAnimations(_shootingState);
     }
 }
