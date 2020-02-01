@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{cc018dfe-f8bb-4b82-a75a-3c0410ff20cf}">
+        <property name="assetPath">
+            <value>EMOTE Robert, Man, Curiosity 09, Mic A.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>192</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>1.5226666666666666</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{d6c75463-ba8f-4b87-936d-948e3370effe}</destination>
+        </relationship>
+    </object>
+</objects>

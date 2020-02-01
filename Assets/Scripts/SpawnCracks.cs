@@ -92,8 +92,6 @@ public class SpawnCracks : MonoBehaviour
         GameObject crack = Instantiate(crackPrefab, Vector3.zero, Quaternion.identity);
         crack.transform.SetParent(transform);
         crack.transform.localPosition = spawnLocation;
-        Vector3 newRot = new Vector3(crack.transform.rotation.x, 90, crack.transform.rotation.z);
-        crack.transform.localRotation = Quaternion.Euler(newRot);
         activeCracks++;
     }
 }

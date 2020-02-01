@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{35dd4105-225d-4ef5-a2a9-962681c206a6}">
+        <property name="assetPath">
+            <value>Whoosh_Source_Rope_03.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>96</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.7576562499999999</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{d6c75463-ba8f-4b87-936d-948e3370effe}</destination>
+        </relationship>
+    </object>
+</objects>

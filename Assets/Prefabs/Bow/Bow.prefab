@@ -122,6 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b99b04ffc18e649b34622892be0958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootNoodleEvent: event:/Sounds/shootNoodle
   _arrow: {fileID: 2950256012714521200, guid: db06e06bd21a6e74fbd6ff77d6f59a3f, type: 3}
   _arrowSpawn: {fileID: 4371709963284046092}
-  _speed: 10
+  _slider: {fileID: 0}
+  _minimumArrowSpeed: 5
+  _maximumArrowSpeed: 10
+  _maximumDrawTime: 2
