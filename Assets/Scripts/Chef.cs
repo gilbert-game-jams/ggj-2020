@@ -8,11 +8,11 @@ public class Chef : MonoBehaviour
 {
 
     [SerializeField]
-    Transform TargetTest;
-    [SerializeField]
     Transform HomeTransform;
+    [SerializeField]
+    Transform TargetTest;
     NavMeshAgent NavAgent;
-    CrackBehaviour crack;
+    CrackBehaviour Crack;
 
     enum ChefState {GoToTarget, GoHome};
     ChefState state = ChefState.GoToTarget;
@@ -20,6 +20,7 @@ public class Chef : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GetNoodle();
         NavAgent = GetComponent<NavMeshAgent>();
       ChangeState(ChefState.GoToTarget);
     }
@@ -27,15 +28,19 @@ public class Chef : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-
+        
         switch(state)
         {
         case  ChefState.GoHome:
-         break;
-         case ChefState.GoToTarget:
-             if(!ReachedTarget(TargetTest.position))
+        if(!ReachedTarget(HomeTransform.position))
         return;
-        crack.UndoRepair();
+        ChangeState(ChefState.GoToTarget);
+         break;
+
+         case ChefState.GoToTarget:
+        if(!ReachedTarget(TargetTest.position))
+        return;
+        Crack.UndoRepair();
            ChangeState(ChefState.GoHome);
          break;
            
@@ -55,7 +60,6 @@ public class Chef : MonoBehaviour
             state = ChefState.GoHome;
             break;
             case ChefState.GoToTarget:
-            crack = TargetTest.GetComponent<CrackBehaviour>();
             NavAgent.SetDestination(TargetTest.position);
             state = ChefState.GoToTarget;
             break;
@@ -65,7 +69,7 @@ public class Chef : MonoBehaviour
 
     bool ReachedTarget(Vector3 _targetPos)
     {
-        float minDistance = 1f;
+        float minDistance = 1.5f;
         Vector3 deltaPos = _targetPos - transform.position;
         return minDistance*minDistance > deltaPos.sqrMagnitude; 
     }
@@ -83,11 +87,12 @@ public class Chef : MonoBehaviour
 
    private void OnTriggerEnter(Collider other) 
    {
+       
    }
 
-   void GetNextNoodle()
+   void GetNoodle()
    {
-       crack = TargetTest.gameObject.GetComponent<CrackBehaviour>();
+       Crack = TargetTest.gameObject.GetComponent<CrackBehaviour>();
    }
 
 }
