@@ -152,9 +152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09d72d5181a0a74e9acabaa1bb405f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSoundEvent: event:/Sounds/spawnCrack
+  hitSoundEvent: event:/Sounds/hitCrack
+  repairCompleteSoundEvent: event:/Sounds/repairCrack
   _fixedCrack: {fileID: 3272128284523652238}
   _brokenCrack: {fileID: 3272128285025856269}
-  _timeUntilDespawn: 5
+  _timeUntilDespawn: 30
 --- !u!65 &5178394472448410067
 BoxCollider:
   m_ObjectHideFlags: 0

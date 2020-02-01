@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class CrackBehaviour : MonoBehaviour
 {
+    [FMODUnity.EventRef] public string spawnSoundEvent;
+    private FMOD.Studio.EventInstance spawnSoundInstance;
+    [FMODUnity.EventRef] public string hitSoundEvent;
+    [FMODUnity.EventRef] public string repairCompleteSoundEvent;
+
     public enum CrackState { Repaired, Broken }
 
     public GameObject _fixedCrack;
     public GameObject _brokenCrack;
+    bool Taken = false;
     
     [Range(0f, 30f)]
     public float _timeUntilDespawn = 5.0f;
@@ -15,8 +21,10 @@ public class CrackBehaviour : MonoBehaviour
     CrackState _crackState = CrackState.Broken;
     float _timeSinceFixed = 0.0f;
     private void Awake() {
-        SetCrackState(CrackState.Broken);
+        SetCrackState(CrackState.Repaired);
+        spawnSoundInstance = FMODUnity.RuntimeManager.CreateInstance(spawnSoundEvent);
     }
+
 
 
     void SetCrackState(CrackState state) {
@@ -24,10 +32,12 @@ public class CrackBehaviour : MonoBehaviour
         switch(state) {
             case CrackState.Broken:
                 _fixedCrack.SetActive(false);
+                spawnSoundInstance.start();
                 _brokenCrack.SetActive(true);
                 break;
             case CrackState.Repaired:
                 _fixedCrack.SetActive(true);
+                spawnSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
                 _brokenCrack.SetActive(false);
                 break;
         }
@@ -46,13 +56,27 @@ public class CrackBehaviour : MonoBehaviour
         if(_crackState == CrackState.Repaired) {
             _timeSinceFixed += Time.deltaTime;
             if(_timeSinceFixed > _timeUntilDespawn) {
-                Destroy(gameObject);
+                FMODUnity.RuntimeManager.PlayOneShot(repairCompleteSoundEvent, transform.position);
+                this.gameObject.SetActive(false);
             }
         }
     }
 
     public void UndoRepair()
     {
+        Taken = false;
         SetCrackState(CrackState.Broken);
+    }
+
+
+    public bool CanTake()
+    {
+        bool canTake = _crackState == CrackState.Repaired && !Taken ? true :false;
+        return canTake;
+    }
+
+    public void Take()
+    {
+        Taken = true;
     }
 }

@@ -2,26 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Chef : MonoBehaviour
 {
+    UnityEvent DeathEvent = new UnityEvent();
 
-    [SerializeField]
-    Transform TargetTest;
-    [SerializeField]
-    Transform HomeTransform;
+    CrackManager crackManager;
+    Vector3 HomePos;
     NavMeshAgent NavAgent;
-    CrackBehaviour crack;
-
-    enum ChefState {GoToTarget, GoHome};
+    CrackBehaviour Crack;
+    Vector3 PatrolWaypoint = Vector3.zero;
+    enum ChefState {GoToTarget, GoHome,Patrol, Eat};
     ChefState state = ChefState.GoToTarget;
+
+    [SerializeField]
+    float TimeToEat = 5;
+    float EatTimer;
 
     // Start is called before the first frame update
     void Start()
     {
-        NavAgent = GetComponent<NavMeshAgent>();
-      ChangeState(ChefState.GoToTarget);
+        HomePos = transform.position;
+        crackManager = FindObjectOfType<CrackManager>();
+      NavAgent = GetComponent<NavMeshAgent>();
+      ChangeState(ChefState.Patrol);
     }
 
     // Update is called once per frame
@@ -33,12 +39,50 @@ public class Chef : MonoBehaviour
         case  ChefState.GoHome:
          break;
          case ChefState.GoToTarget:
-             if(!ReachedTarget(TargetTest.position))
+        if(Crack == null)
+        {
+            ChangeState(ChefState.Patrol);
+            return;
+        }
+        if(!ReachedTarget(Crack.transform.position))
         return;
-        crack.UndoRepair();
-           ChangeState(ChefState.GoHome);
+           ChangeState(ChefState.Eat);
          break;
            
+           case ChefState.Patrol:
+            
+             if(ReachedTarget(PatrolWaypoint))
+             {
+                if(crackManager.TryGetCrack(out Crack))
+                {
+                    if(Crack != null)
+                    {
+                        Crack.Take();
+                        NavAgent.SetDestination(Crack.transform.position);
+                        ChangeState(ChefState.GoToTarget);
+                        return;
+                    }
+                }
+                PatrolWaypoint = crackManager.GetPatrolPoint();
+                NavAgent.SetDestination(PatrolWaypoint);
+             }
+           break;
+            case ChefState.Eat:
+
+            if(!Crack.gameObject.activeSelf)
+            {
+                NavAgent.isStopped = false;
+                ChangeState(ChefState.Patrol);
+                return;
+            }
+
+            if(EatTimer < Time.time)
+            {
+                Crack.UndoRepair();
+                NavAgent.isStopped = false;
+                ChangeState(ChefState.Patrol);
+            } 
+            break;
         }
 
         
@@ -55,9 +99,18 @@ public class Chef : MonoBehaviour
             state = ChefState.GoHome;
             break;
             case ChefState.GoToTarget:
-            crack = TargetTest.GetComponent<CrackBehaviour>();
-            NavAgent.SetDestination(TargetTest.position);
+            NavAgent.SetDestination(Crack.transform.position);
             state = ChefState.GoToTarget;
+            break;
+            case ChefState.Patrol:
+            PatrolWaypoint = crackManager.GetPatrolPoint();
+            NavAgent.SetDestination(PatrolWaypoint);
+            state = ChefState.Patrol;
+            break;
+            case ChefState.Eat:
+            NavAgent.isStopped = true;
+            EatTimer = Time.time  + TimeToEat;
+            state = ChefState.Eat;
             break;
         }
     }
@@ -65,7 +118,7 @@ public class Chef : MonoBehaviour
 
     bool ReachedTarget(Vector3 _targetPos)
     {
-        float minDistance = 1f;
+        float minDistance = 1.5f;
         Vector3 deltaPos = _targetPos - transform.position;
         return minDistance*minDistance > deltaPos.sqrMagnitude; 
     }
@@ -78,16 +131,29 @@ public class Chef : MonoBehaviour
     void GoHome()
     {
         Debug.Log("Go Home");
-        NavAgent.SetDestination(HomeTransform.position);
+        NavAgent.SetDestination(HomePos);
     }
 
    private void OnTriggerEnter(Collider other) 
    {
+       if(other.GetComponent<ArrowBehaviour>() != null)
+       {
+           if(DeathEvent.GetPersistentEventCount() <= 0)
+           return;
+           DeathEvent.Invoke();
+           Destroy(this);
+       }
    }
 
-   void GetNextNoodle()
+
+   void SubscribeToDeathEventChef(ChefManager _manager)
    {
-       crack = TargetTest.gameObject.GetComponent<CrackBehaviour>();
+       DeathEvent.AddListener(_manager.RemoveChef);
    }
+
+    private void OnDisable()
+    {
+        DeathEvent.RemoveAllListeners();
+    }
 
 }
