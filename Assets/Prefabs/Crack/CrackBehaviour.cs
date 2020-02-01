@@ -21,7 +21,7 @@ public class CrackBehaviour : MonoBehaviour
     CrackState _crackState = CrackState.Broken;
     float _timeSinceFixed = 0.0f;
     private void Awake() {
-        SetCrackState(CrackState.Broken);
+        SetCrackState(CrackState.Repaired);
         spawnSoundInstance = FMODUnity.RuntimeManager.CreateInstance(spawnSoundEvent);
     }
 
@@ -57,13 +57,14 @@ public class CrackBehaviour : MonoBehaviour
             _timeSinceFixed += Time.deltaTime;
             if(_timeSinceFixed > _timeUntilDespawn) {
                 FMODUnity.RuntimeManager.PlayOneShot(repairCompleteSoundEvent, transform.position);
-                Destroy(gameObject);
+                this.gameObject.SetActive(false);
             }
         }
     }
 
     public void UndoRepair()
     {
+        Taken = false;
         SetCrackState(CrackState.Broken);
     }
 
@@ -77,10 +78,5 @@ public class CrackBehaviour : MonoBehaviour
     public void Take()
     {
         Taken = true;
-    }
-
-    public void GiveBack()
-    {
-        Taken = false;
     }
 }

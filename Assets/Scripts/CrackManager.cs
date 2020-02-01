@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CrackManager : MonoBehaviour
 {
+
+    [SerializeField]
+    Transform[] PatrolPoints;
     [SerializeField]
     Transform CrackParent;
     List<CrackBehaviour> DisabledCrackList = new List<CrackBehaviour>(); 
@@ -71,6 +74,11 @@ public class CrackManager : MonoBehaviour
         return false;
     }
 
+    public Vector3 GetPatrolPoint()
+    {
+        int randomIndex = Random.Range(0,PatrolPoints.Length);
+        return PatrolPoints[randomIndex].position;
+    }
     void UpdateTimer()
     {
         CrackTimer = Time.time+ Random.Range(CrackMinDelay,CrackMaxDelay);
