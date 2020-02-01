@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 7928202173484652093}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10.614, y: 11.56, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 923673011150596342}
   m_Father: {fileID: 0}
@@ -51,6 +51,7 @@ MonoBehaviour:
   secondsBetweenEachCrackSpawn: 1
   amountOfCracksToLose: 5
   radiusToCheckForCracks: 1
+  xOffset: 3.86
 --- !u!1001 &5308406384233448428
 PrefabInstance:
   m_ObjectHideFlags: 0
