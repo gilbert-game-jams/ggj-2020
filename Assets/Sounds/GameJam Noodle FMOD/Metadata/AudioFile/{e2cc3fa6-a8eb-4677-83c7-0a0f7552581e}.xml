@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{e2cc3fa6-a8eb-4677-83c7-0a0f7552581e}">
+        <property name="assetPath">
+            <value>Jelly,Movement,Gore,Liquid,Splat,Impact,Slime,Various08.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>96</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.38400000000000001</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{d6c75463-ba8f-4b87-936d-948e3370effe}</destination>
+        </relationship>
+    </object>
+</objects>
