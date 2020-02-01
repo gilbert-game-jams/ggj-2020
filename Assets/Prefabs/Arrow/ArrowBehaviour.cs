@@ -15,7 +15,7 @@ public class ArrowBehaviour : MonoBehaviour
 
     private void FixedUpdate() {
         var velocityDir = _rigidBody.velocity.normalized;
-        _transform.LookAt(_transform.position - velocityDir);
+        _transform.LookAt(_transform.position + velocityDir);
     }
 
     private void OnCollisionEnter(Collision other) {

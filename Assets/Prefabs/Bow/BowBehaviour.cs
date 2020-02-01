@@ -49,10 +49,10 @@ public class BowBehaviour : MonoBehaviour
         return Mathf.Lerp(minSpeed, maxSpeed, draw);
     }
 
-    GameObject SpawnArrow(GameObject spawnObject) {
-        var arrow = GameObject.Instantiate(_arrow, spawnObject.transform.position, spawnObject.transform.rotation);
+    GameObject SpawnArrow(GameObject arrowSpawn) {
+        var arrow = GameObject.Instantiate(_arrow, arrowSpawn.transform.position, arrowSpawn.transform.rotation);
         var arrowSpawnTrans = _arrowSpawn.transform;
-        arrow.transform.LookAt(arrowSpawnTrans.position - arrowSpawnTrans.forward, arrowSpawnTrans.up);
+        arrow.transform.LookAt(arrowSpawnTrans.position + arrowSpawnTrans.forward, arrowSpawnTrans.up);
         return arrow;
     }
 
@@ -100,11 +100,11 @@ public class BowBehaviour : MonoBehaviour
                 _animator.SetBool("Aiming", false);
                 break;
         }
-        Debug.Log(_animator.speed);
     }
 
     void Update()
     {
+        Debug.Log(_arrowSpawn.transform.position);
         _timeSinceArrowFired += Time.deltaTime;
         if (Input.GetMouseButtonUp(0) && _loadedArrow != null) 
         {
