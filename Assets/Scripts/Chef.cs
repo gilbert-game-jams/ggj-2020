@@ -18,7 +18,6 @@ public class Chef : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        crackManager = FindObjectOfType<CrackManager>();
         NavAgent = GetComponent<NavMeshAgent>();
       ChangeState(ChefState.GoToTarget);
     }
@@ -26,16 +25,13 @@ public class Chef : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        
+
         switch(state)
         {
         case  ChefState.GoHome:
-        if(!ReachedTarget(HomeTransform.position))
-        return;
-        ChangeState(ChefState.GoToTarget);
          break;
-
          case ChefState.GoToTarget:
+
         if(Crack == null)
         {
             if(!crackManager.TryGetCrack(out Crack))
@@ -48,6 +44,7 @@ public class Chef : MonoBehaviour
         
         }
         if(!ReachedTarget(Crack.transform.position))
+
         return;
         Crack.UndoRepair();
            ChangeState(ChefState.GoHome);
@@ -78,7 +75,7 @@ public class Chef : MonoBehaviour
 
     bool ReachedTarget(Vector3 _targetPos)
     {
-        float minDistance = 1.5f;
+        float minDistance = 1f;
         Vector3 deltaPos = _targetPos - transform.position;
         return minDistance*minDistance > deltaPos.sqrMagnitude; 
     }
@@ -101,7 +98,4 @@ public class Chef : MonoBehaviour
            Destroy(this);
        }
    }
-
-
-
 }

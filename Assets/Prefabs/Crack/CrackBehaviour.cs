@@ -26,7 +26,6 @@ public class CrackBehaviour : MonoBehaviour
             case CrackState.Broken:
                 _fixedCrack.SetActive(false);
                 _brokenCrack.SetActive(true);
-                Taken = false;
                 break;
             case CrackState.Repaired:
                 _fixedCrack.SetActive(true);
@@ -57,6 +56,7 @@ public class CrackBehaviour : MonoBehaviour
     {
         SetCrackState(CrackState.Broken);
     }
+
 
     public bool CanTake()
     {

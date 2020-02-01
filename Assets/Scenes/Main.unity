@@ -188,17 +188,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.001
       objectReference: {fileID: 0}
-    - target: {fileID: 8486500061604270888, guid: 72da5f240745b8a48aad59b6c18a1d5f,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8486500061604270888, guid: 72da5f240745b8a48aad59b6c18a1d5f,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2583133888967986810, guid: 72da5f240745b8a48aad59b6c18a1d5f,
+        type: 3}
+      propertyPath: _slider
+      value: 
+      objectReference: {fileID: 649406404}
+    - target: {fileID: 6062470354763561842, guid: 72da5f240745b8a48aad59b6c18a1d5f,
+        type: 3}
+      propertyPath: _arrowSpawn
+      value: 
+      objectReference: {fileID: 1810904990}
+    - target: {fileID: 6062470354763561842, guid: 72da5f240745b8a48aad59b6c18a1d5f,
         type: 3}
       propertyPath: _slider
       value: 
@@ -570,6 +570,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f565202a737c3de4cb95b03ff2f1a640, type: 3}
+--- !u!1 &1810904990 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3853026322488329009, guid: 72da5f240745b8a48aad59b6c18a1d5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 37861746}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1847340766
 GameObject:
   m_ObjectHideFlags: 19
