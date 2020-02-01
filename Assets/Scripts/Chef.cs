@@ -18,7 +18,8 @@ public class Chef : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        NavAgent = GetComponent<NavMeshAgent>();
+        crackManager = FindObjectOfType<CrackManager>();
+      NavAgent = GetComponent<NavMeshAgent>();
       ChangeState(ChefState.GoToTarget);
     }
 
