@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class CrackBehaviour : MonoBehaviour
 {
+    [FMODUnity.EventRef] public string spawnSoundEvent;
+    private FMOD.Studio.EventInstance spawnSoundInstance;
+    [FMODUnity.EventRef] public string hitSoundEvent;
+    [FMODUnity.EventRef] public string repairCompleteSoundEvent;
+
     public enum CrackState { Repaired, Broken }
 
     public GameObject _fixedCrack;
@@ -17,7 +22,9 @@ public class CrackBehaviour : MonoBehaviour
     float _timeSinceFixed = 0.0f;
     private void Awake() {
         SetCrackState(CrackState.Broken);
+        spawnSoundInstance = FMODUnity.RuntimeManager.CreateInstance(spawnSoundEvent);
     }
+
 
 
     void SetCrackState(CrackState state) {
@@ -25,10 +32,12 @@ public class CrackBehaviour : MonoBehaviour
         switch(state) {
             case CrackState.Broken:
                 _fixedCrack.SetActive(false);
+                spawnSoundInstance.start();
                 _brokenCrack.SetActive(true);
                 break;
             case CrackState.Repaired:
                 _fixedCrack.SetActive(true);
+                spawnSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
                 _brokenCrack.SetActive(false);
                 break;
         }
@@ -47,6 +56,7 @@ public class CrackBehaviour : MonoBehaviour
         if(_crackState == CrackState.Repaired) {
             _timeSinceFixed += Time.deltaTime;
             if(_timeSinceFixed > _timeUntilDespawn) {
+                FMODUnity.RuntimeManager.PlayOneShot(repairCompleteSoundEvent, transform.position);
                 Destroy(gameObject);
             }
         }
