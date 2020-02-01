@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ArrowBehaviour : MonoBehaviour
 {
+    [FMODUnity.EventRef] public string hitCrack;
     Rigidbody _rigidBody;
     Transform _transform;
 
@@ -18,6 +19,7 @@ public class ArrowBehaviour : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision other) {
+        FMODUnity.RuntimeManager.PlayOneShot(hitCrack, transform.position);
         Destroy(gameObject);
     }
 }

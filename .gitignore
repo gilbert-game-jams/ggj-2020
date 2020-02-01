@@ -59,3 +59,16 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Assets/Plugins/FMOD Plugin.meta
+Assets/Sounds/GameJam Noodle FMOD/Metadata/EffectPreset.meta
+Assets/Sounds/GameJam Noodle FMOD/Metadata/Group.meta
+Assets/Sounds/GameJam Noodle FMOD/Metadata/MixerView.meta
+Assets/Sounds/GameJam Noodle FMOD/Metadata/ParameterPreset.meta
+Assets/Sounds/GameJam Noodle FMOD/Metadata/Snapshot.meta
+Assets/Sounds/GameJam Noodle FMOD/Metadata/VCA.meta
+Assets/Sounds/GameJam Noodle FMOD/Plugins.meta
+Assets/StreamingAssets/Master Bank.bank
+Assets/StreamingAssets/Master Bank.bank.meta
+Assets/StreamingAssets/Master Bank.strings.bank
+Assets/StreamingAssets/Master Bank.strings.bank.meta
+fmod_editor.log

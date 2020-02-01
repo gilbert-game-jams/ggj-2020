@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: event:/bone breaking
   guid: 024c19c90258e5499c770322cc79d1c2
   Banks:
-  - {fileID: 5467179016860759151}
+  - {fileID: 3596470200895175566}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -37,7 +37,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Sounds/FMOD project/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637160175476333494
+  lastModified: 637161555950995401
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -75,16 +75,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -4424925759637737177}
-  - {fileID: 5467179016860759151}
+  - {fileID: 3596470200895175566}
   EditorEvents:
   - {fileID: -8290175454743242662}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 5467179016860759151}
+  - {fileID: 3596470200895175566}
   StringsBanks:
   - {fileID: -4424925759637737177}
-  stringsBankWriteTime: 637160175476333494
+  stringsBankWriteTime: 637161555950995401
   cacheVersion: 3
+--- !u!114 &3596470200895175566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Sounds/FMOD project/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637161555950985492
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &5467179016860759151
 MonoBehaviour:
   m_ObjectHideFlags: 0
