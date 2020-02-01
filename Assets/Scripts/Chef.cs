@@ -10,30 +10,64 @@ public class Chef : MonoBehaviour
     [SerializeField]
     Transform TargetTest;
     [SerializeField]
-    Transform HomTransform;
-
+    Transform HomeTransform;
     NavMeshAgent NavAgent;
+    CrackBehaviour crack;
+
+    enum ChefState {GoToTarget, GoHome};
+    ChefState state = ChefState.GoToTarget;
+
     // Start is called before the first frame update
     void Start()
     {
         NavAgent = GetComponent<NavMeshAgent>();
-        GoToTarget(TargetTest);
+      ChangeState(ChefState.GoToTarget);
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
+
+        switch(state)
+        {
+        case  ChefState.GoHome:
+         break;
+         case ChefState.GoToTarget:
+             if(!ReachedTarget(TargetTest.position))
+        return;
+        crack.UndoRepair();
+           ChangeState(ChefState.GoHome);
+         break;
+           
+        }
+
+        
        
     }
 
-    private void FixedUpdate()
+
+    void ChangeState(ChefState _newState)
     {
-        float minDistance = 0.1f;
-        Vector3 deltaPos = TargetTest.position - transform.position;
-        if (minDistance * minDistance < deltaPos.sqrMagnitude)
+        switch(_newState)
         {
+            case ChefState.GoHome:
             GoHome();
+            state = ChefState.GoHome;
+            break;
+            case ChefState.GoToTarget:
+            crack = TargetTest.GetComponent<CrackBehaviour>();
+            NavAgent.SetDestination(TargetTest.position);
+            state = ChefState.GoToTarget;
+            break;
         }
+    }
+
+
+    bool ReachedTarget(Vector3 _targetPos)
+    {
+        float minDistance = 1f;
+        Vector3 deltaPos = _targetPos - transform.position;
+        return minDistance*minDistance > deltaPos.sqrMagnitude; 
     }
 
     void GoToTarget(Transform _target)
@@ -42,8 +76,18 @@ public class Chef : MonoBehaviour
     }
 
     void GoHome()
-    { }
+    {
+        Debug.Log("Go Home");
+        NavAgent.SetDestination(HomeTransform.position);
+    }
 
+   private void OnTriggerEnter(Collider other) 
+   {
+   }
 
+   void GetNextNoodle()
+   {
+       crack = TargetTest.gameObject.GetComponent<CrackBehaviour>();
+   }
 
 }

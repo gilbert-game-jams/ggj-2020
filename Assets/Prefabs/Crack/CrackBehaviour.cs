@@ -50,4 +50,9 @@ public class CrackBehaviour : MonoBehaviour
             }
         }
     }
+
+    public void UndoRepair()
+    {
+        SetCrackState(CrackState.Broken);
+    }
 }
