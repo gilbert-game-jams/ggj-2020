@@ -5,10 +5,10 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Animator))]
 public class Chef : MonoBehaviour
 {
-    UnityEvent DeathEvent = new UnityEvent();
-
+    UnityEvent DeathEvent = new UnityEvent();   
     CrackManager crackManager;
     Vector3 HomePos;
     NavMeshAgent NavAgent;
@@ -20,6 +20,10 @@ public class Chef : MonoBehaviour
     [SerializeField]
     float TimeToEat = 5;
     float EatTimer;
+    [SerializeField]
+    Animator ChefAnimator;
+    [SerializeField]
+    Transform MeshTransform;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +37,25 @@ public class Chef : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+        float angle = Vector3.Angle(transform.position + Vector3.right, transform.forward);
+       /* if(false)
+        {
+            Debug.Log("TryToChagne");
+            if(MeshTransform.localRotation.x < 90)
+            {
+                Debug.Log("StartClimb");
+            MeshTransform.localRotation = Quaternion.Euler(90f,transform.rotation.y,transform.rotation.z);
+            ChefAnimator.SetBool("Climb",true);
+            }
+        }
+        else
+        {
+             if(MeshTransform.localRotation.x >= 90)
+            {
+            MeshTransform.localRotation = Quaternion.Euler(0,transform.rotation.y,transform.rotation.z);
+            ChefAnimator.SetBool("Climb",false);
+            }
+        }*/
 
         switch(state)
         {
@@ -108,6 +131,7 @@ public class Chef : MonoBehaviour
             state = ChefState.Patrol;
             break;
             case ChefState.Eat:
+            ChefAnimator.SetBool("Stealing",true);
             NavAgent.isStopped = true;
             EatTimer = Time.time  + TimeToEat;
             state = ChefState.Eat;
@@ -136,8 +160,10 @@ public class Chef : MonoBehaviour
 
    private void OnTriggerEnter(Collider other) 
    {
+       Debug.Log("hi");
        if(other.GetComponent<ArrowBehaviour>() != null)
        {
+           ChefAnimator.SetTrigger("Hit");
            if(DeathEvent.GetPersistentEventCount() <= 0)
            return;
            DeathEvent.Invoke();
@@ -145,6 +171,9 @@ public class Chef : MonoBehaviour
        }
    }
 
+    private void OnTriggerExit(Collider other) {
+        Debug.Log("Bye");
+    }
 
    void SubscribeToDeathEventChef(ChefManager _manager)
    {
