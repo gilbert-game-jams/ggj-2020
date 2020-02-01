@@ -35,22 +35,32 @@ public class BowBehaviour : MonoBehaviour
         _maximumArrowSpeed = _minimumArrowSpeed > _maximumArrowSpeed ? _minimumArrowSpeed : _maximumArrowSpeed;
     }
 
+    private void Awake() {
+        var arrow = SpawnArrow(_arrowSpawn);
+        arrow.transform.parent = _arrowSpawn.transform;
+        arrow.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
     float GetArrowSpeed(float minSpeed, float maxSpeed, float draw) {
         draw = Mathf.Clamp(draw, 0, 1);
         return Mathf.Lerp(minSpeed, maxSpeed, draw);
+    }
+
+    GameObject SpawnArrow(GameObject spawnObject) {
+        return GameObject.Instantiate(_arrow, spawnObject.transform.position, spawnObject.transform.rotation);
     }
 
     void FireArrow(float drawFactor, float maxSpeed)
     {
         shootNoodleInstance.setParameterValue("BowChargeRelease", 1);
 
-        var arrow = GameObject.Instantiate(_arrow, _arrowSpawn.transform.position, _arrow.transform.rotation);
+        var arrow = SpawnArrow(_arrowSpawn);
 
-        // arrow.GetComponent<Rigidbody>().velocity = -transform.forward * maxSpeed * drawFactor;
-        arrow.GetComponent<Rigidbody>().velocity = -transform.forward * GetArrowSpeed(_minimumArrowSpeed, _maximumArrowSpeed, drawFactor);
+        // arrow.GetComponent<Rigidbody>().velocity = -transform.right * GetArrowSpeed(_minimumArrowSpeed, _maximumArrowSpeed, drawFactor);
+        arrow.GetComponent<Rigidbody>().velocity = -_arrowSpawn.transform.right * GetArrowSpeed(_minimumArrowSpeed, _maximumArrowSpeed, drawFactor);
         
         var arrowSpawnTrans = _arrowSpawn.transform;
-        arrow.transform.LookAt(arrowSpawnTrans.position + arrowSpawnTrans.right, arrowSpawnTrans.up);
+        arrow.transform.LookAt(arrowSpawnTrans.position + arrowSpawnTrans.forward, arrowSpawnTrans.up);
     }
 
     void ResetDraw() {
