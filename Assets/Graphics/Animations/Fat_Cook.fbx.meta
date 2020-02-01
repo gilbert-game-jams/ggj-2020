@@ -1,20 +1,20 @@
 fileFormatVersion: 2
-guid: 9fcc9147acce03347903c3bb0e94d178
+guid: e9dfc49ca4693fc47a8290fa28fa16be
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
-      74: 2992107037688685273
-    second: Bow_Aim
+      74: 3541297829767021732
+    second: Climbing
   - first:
-      74: 2290340524974406348
-    second: Bow_Idle
+      74: -3287483758618437091
+    second: Stealing
   - first:
-      74: 9164213041980346332
-    second: Bow_Shoot
+      74: -1610863427237328480
+    second: Walking
   - first:
-      74: 2391492232992475205
-    second: Bow_StopAim
+      74: -1304387373167265313
+    second: Hit
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -44,11 +44,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Bow_Aim
-      takeName: Bow_Aim
+      name: Climbing
+      takeName: Climbing
       internalID: 0
       firstFrame: 0
-      lastFrame: 200
+      lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -73,11 +73,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Bow_Idle
-      takeName: Bow_Idle
+      name: Stealing
+      takeName: Stealing
       internalID: 0
       firstFrame: 0
-      lastFrame: 350
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -102,40 +102,40 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Bow_Shoot
-      takeName: Bow_Shoot
+      name: Walking
+      takeName: Walking
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Hit
+      takeName: Hit
       internalID: 0
       firstFrame: 0
       lastFrame: 15
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Bow_StopAim
-      takeName: Bow_StopAim
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
