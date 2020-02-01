@@ -50,7 +50,7 @@ public class BowBehaviour : MonoBehaviour
         arrow.GetComponent<Rigidbody>().velocity = -transform.forward * GetArrowSpeed(_minimumArrowSpeed, _maximumArrowSpeed, drawFactor);
         
         var arrowSpawnTrans = _arrowSpawn.transform;
-        arrow.transform.LookAt(arrowSpawnTrans.position + arrowSpawnTrans.forward, arrowSpawnTrans.up);
+        arrow.transform.LookAt(arrowSpawnTrans.position + arrowSpawnTrans.right, arrowSpawnTrans.up);
     }
 
     void ResetDraw() {
@@ -59,6 +59,7 @@ public class BowBehaviour : MonoBehaviour
     }
 
     void HandleAnimations(ShootingState shootingState) {
+        Debug.Log(shootingState);
         switch(shootingState) {
             case ShootingState.Drawing:
                 _animator.SetBool("Aiming", true);
@@ -83,10 +84,7 @@ public class BowBehaviour : MonoBehaviour
 
             _shootingState = ShootingState.Shooting;
             drawingBow = false;
-        }
-        else if(Input.GetMouseButtonUp(0)) {
-            _shootingState = ShootingState.Idle;
-        }       
+        }      
         else if (Input.GetMouseButton(0)) {
             _shootingState = ShootingState.Drawing;
             if (!drawingBow)
@@ -98,6 +96,9 @@ public class BowBehaviour : MonoBehaviour
             drawingBow = true;
             _drawTime = _drawTime < _maximumDrawTime ? _drawTime + Time.deltaTime : _maximumDrawTime;
             _drawFactor = _drawTime / _maximumDrawTime;
+        }
+        else {
+            _shootingState = ShootingState.Idle;
         }
         _slider.value = _drawFactor;
 
