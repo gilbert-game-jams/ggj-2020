@@ -1,30 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9125062877974536686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Sounds/shootNoodle
-  m_EditorClassIdentifier: 
-  Path: event:/Sounds/shootNoodle
-  guid: 21cc5f513ab5f5489a05a25721abc6f9
-  Banks:
-  - {fileID: -8494051699212728183}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -6750040343600294873}
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 2500
---- !u!114 &-8494051699212728183
+--- !u!114 &-7971395094192135847
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -36,120 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master Bank.bank
   m_EditorClassIdentifier: 
-  Path: C:\MyStuff\Programming\GlobalGameJam\ggj-2020\Assets\Sounds\GameJam Noodle
-    FMOD\Build\Desktop\Master Bank.bank
-  lastModified: 637161783513990553
+  Path: D:\Dokument\Unity projekt\ggj-2020\Assets\Sounds\GameJam Noodle FMOD\Build\Desktop\Master
+    Bank.bank
+  lastModified: 637161873857188107
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 5685472
   Exists: 1
---- !u!114 &-7492777027217532766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master Bank.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets\Sounds\GameJam Noodle FMOD\Build\Desktop\Master Bank.strings.bank
-  lastModified: 637161783514000225
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 1076
-  Exists: 1
---- !u!114 &-7394135988533721245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Sounds/hitCrack
-  m_EditorClassIdentifier: 
-  Path: event:/Sounds/hitCrack
-  guid: 53206b90bcb80740b452d340ce4668bb
-  Banks:
-  - {fileID: 3850965520649720895}
-  - {fileID: -8494051699212728183}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 408
---- !u!114 &-6750040343600294873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/shootNoodle/BowChargeRelease
-  m_EditorClassIdentifier: 
-  Name: BowChargeRelease
-  Min: 0
-  Max: 1
-  Default: 0
-  Exists: 1
---- !u!114 &-6086403355611922158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Sounds/ShootNoodle
-  m_EditorClassIdentifier: 
-  Path: event:/Sounds/ShootNoodle
-  guid: 49b58cf95fa1474fbb779332fb5a19b3
-  Banks: []
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-4993762110221825215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/BackgroundMusic
-  m_EditorClassIdentifier: 
-  Path: event:/Music/BackgroundMusic
-  guid: 40811d20de9fd24aa8cc5f173e5496c5
-  Banks:
-  - {fileID: -8494051699212728183}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 346003
---- !u!114 &-3508795944806268465
+--- !u!114 &-7580628655115422058
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,7 +35,7 @@ MonoBehaviour:
   Path: event:/Sounds/chefTakeNoodle
   guid: e18c81b04d087a468dc6e7fca566285b
   Banks:
-  - {fileID: -8494051699212728183}
+  - {fileID: -7971395094192135847}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -172,30 +43,7 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1000
---- !u!114 &-769210270744971389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Sounds/hitCrack
-  m_EditorClassIdentifier: 
-  Path: event:/Sounds/hitCrack
-  guid: 53206b90bcb80740b452d340ce4668bb
-  Banks:
-  - {fileID: -667893275663397699}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1210
---- !u!114 &-667893275663397699
+--- !u!114 &-6632990704027095688
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,46 +53,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master Bank.bank
+  m_Name: bank:/Master Bank.strings.bank
   m_EditorClassIdentifier: 
-  Path: D:\Dokument\Unity projekt\ggj-2020\Assets\Sounds\GameJam Noodle FMOD\Build\Desktop\Master
-    Bank.bank
-  lastModified: 637161584511294913
+  Path: Assets\Sounds\GameJam Noodle FMOD\Build\Desktop\Master Bank.strings.bank
+  lastModified: 637161873857198156
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 26304
+    Value: 1076
   Exists: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: -7492777027217532766}
-  - {fileID: -8494051699212728183}
-  EditorEvents:
-  - {fileID: -7394135988533721245}
-  - {fileID: -9125062877974536686}
-  - {fileID: -4993762110221825215}
-  - {fileID: 4353172840367404307}
-  - {fileID: 7160003521104226923}
-  - {fileID: -3508795944806268465}
-  - {fileID: 1147477592368645656}
-  MasterBanks:
-  - {fileID: -8494051699212728183}
-  StringsBanks:
-  - {fileID: -7492777027217532766}
-  stringsBankWriteTime: 637161783514000225
-  cacheVersion: 3
---- !u!114 &1147477592368645656
+--- !u!114 &-2585761923899564398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,40 +72,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Sounds/repairCrack
+  m_Name: event:/Sounds/shootNoodle
   m_EditorClassIdentifier: 
-  Path: event:/Sounds/repairCrack
-  guid: 0b6230b93b15f9409401126ed5f0c7c0
+  Path: event:/Sounds/shootNoodle
+  guid: 21cc5f513ab5f5489a05a25721abc6f9
   Banks:
-  - {fileID: -8494051699212728183}
+  - {fileID: -7971395094192135847}
   IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1493
---- !u!114 &3850965520649720895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
-  Path: D:\Dokument\Unity projekt\ggj-2020\Assets\Sounds\GameJam Noodle FMOD\Build\Desktop\Master
-    Bank.bank
-  lastModified: 637161584511294913
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 26304
-  Exists: 1
---- !u!114 &4353172840367404307
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 8599015511027641116}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2500
+--- !u!114 &-709501796184611481
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,7 +101,7 @@ MonoBehaviour:
   Path: event:/Sounds/chefSpawn
   guid: b3971535b9decb478e203ff2a03fdf0c
   Banks:
-  - {fileID: -8494051699212728183}
+  - {fileID: -7971395094192135847}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -310,7 +109,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1522
---- !u!114 &6007864882494857366
+--- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -319,18 +118,119 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master Bank.bank
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  Path: D:\Dokument\Unity projekt\ggj-2020\Assets\Sounds\GameJam Noodle FMOD\Build\Desktop\Master
-    Bank.bank
-  lastModified: 637161584511294913
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 26304
-  Exists: 1
---- !u!114 &6563405667029720722
+  EditorBanks:
+  - {fileID: -6632990704027095688}
+  - {fileID: -7971395094192135847}
+  EditorEvents:
+  - {fileID: 8050544997036814960}
+  - {fileID: -2585761923899564398}
+  - {fileID: 90157494659365415}
+  - {fileID: 7557862612419536507}
+  - {fileID: -709501796184611481}
+  - {fileID: 6228532285546201917}
+  - {fileID: -7580628655115422058}
+  MasterBanks:
+  - {fileID: -7971395094192135847}
+  StringsBanks:
+  - {fileID: -6632990704027095688}
+  stringsBankWriteTime: 637161873857198156
+  cacheVersion: 3
+--- !u!114 &90157494659365415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/BackgroundMusic
+  m_EditorClassIdentifier: 
+  Path: event:/Music/BackgroundMusic
+  guid: 40811d20de9fd24aa8cc5f173e5496c5
+  Banks:
+  - {fileID: -7971395094192135847}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 346003
+--- !u!114 &6228532285546201917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sounds/spawnCrack
+  m_EditorClassIdentifier: 
+  Path: event:/Sounds/spawnCrack
+  guid: c3b118f5d9442546aa4a6476c0df12a3
+  Banks:
+  - {fileID: -7971395094192135847}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 67250
+--- !u!114 &7557862612419536507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sounds/hitCrack
+  m_EditorClassIdentifier: 
+  Path: event:/Sounds/hitCrack
+  guid: 53206b90bcb80740b452d340ce4668bb
+  Banks:
+  - {fileID: -7971395094192135847}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 408
+--- !u!114 &8050544997036814960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sounds/repairCrack
+  m_EditorClassIdentifier: 
+  Path: event:/Sounds/repairCrack
+  guid: 0b6230b93b15f9409401126ed5f0c7c0
+  Banks:
+  - {fileID: -7971395094192135847}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1493
+--- !u!114 &8599015511027641116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -346,66 +246,4 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
-  Exists: 1
---- !u!114 &6591426483893967092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master Bank.strings.bank
-  m_EditorClassIdentifier: 
-  Path: Assets\Sounds\GameJam Noodle FMOD\Build\Desktop\Master Bank.strings.bank
-  lastModified: 637161584511294913
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 726
-  Exists: 1
---- !u!114 &7160003521104226923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Sounds/spawnCrack
-  m_EditorClassIdentifier: 
-  Path: event:/Sounds/spawnCrack
-  guid: c3b118f5d9442546aa4a6476c0df12a3
-  Banks:
-  - {fileID: -8494051699212728183}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 67250
---- !u!114 &7302591912547556870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master Bank.bank
-  m_EditorClassIdentifier: 
-  Path: P:\GameJam\ggj-2020\Assets\Sounds\GameJam Noodle FMOD\Build\Desktop\Master
-    Bank.bank
-  lastModified: 637161569111675770
-  LoadResult: 0
-  FileSizes:
-  - Name: Desktop
-    Value: 26304
   Exists: 1
