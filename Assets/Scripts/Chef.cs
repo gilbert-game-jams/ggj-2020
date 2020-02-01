@@ -6,13 +6,11 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Chef : MonoBehaviour
 {
-
-    [SerializeField]
-    Transform TargetTest;
+    CrackManager crackManager;
     [SerializeField]
     Transform HomeTransform;
     NavMeshAgent NavAgent;
-    CrackBehaviour crack;
+    CrackBehaviour Crack;
 
     enum ChefState {GoToTarget, GoHome};
     ChefState state = ChefState.GoToTarget;
@@ -33,9 +31,22 @@ public class Chef : MonoBehaviour
         case  ChefState.GoHome:
          break;
          case ChefState.GoToTarget:
-             if(!ReachedTarget(TargetTest.position))
+
+        if(Crack == null)
+        {
+            if(!crackManager.TryGetCrack(out Crack))
+            {
+                NavAgent.isStopped = true;
+                 return;
+            }
+            NavAgent.isStopped = false;
+            NavAgent.SetDestination(Crack.transform.position);
+        
+        }
+        if(!ReachedTarget(Crack.transform.position))
+
         return;
-        crack.UndoRepair();
+        Crack.UndoRepair();
            ChangeState(ChefState.GoHome);
          break;
            
@@ -55,8 +66,7 @@ public class Chef : MonoBehaviour
             state = ChefState.GoHome;
             break;
             case ChefState.GoToTarget:
-            crack = TargetTest.GetComponent<CrackBehaviour>();
-            NavAgent.SetDestination(TargetTest.position);
+            Crack = null;
             state = ChefState.GoToTarget;
             break;
         }
@@ -83,11 +93,9 @@ public class Chef : MonoBehaviour
 
    private void OnTriggerEnter(Collider other) 
    {
+       if(other.GetComponent<ArrowBehaviour>() != null)
+       {
+           Destroy(this);
+       }
    }
-
-   void GetNextNoodle()
-   {
-       crack = TargetTest.gameObject.GetComponent<CrackBehaviour>();
-   }
-
 }
