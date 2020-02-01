@@ -57,8 +57,8 @@ public class SpawnCracks : MonoBehaviour
 
     private Vector3 spawnLocation;
     private void CheckLocationForCracks()
-    { 
-        
+    {
+        Vector3 mySpawnLocation = Vector3.zero;
         bool crackHit = false;
         Collider[] hitObjects = Physics.OverlapSphere(spawnLocation, radiusToCheckForCracks);
 
@@ -76,19 +76,25 @@ public class SpawnCracks : MonoBehaviour
         }
         else
         {
-            InstantiateCrack();
+            InstantiateCrack(mySpawnLocation);
         }
         
     }
-    
+
+    public float xOffset = 3.86f;
     private void RandomizeSpawnLocation()
     {
-        spawnLocation = new Vector3(Random.Range(-myRenderer.bounds.size.x/2, myRenderer.bounds.size.x/2), Random.Range(-myRenderer.bounds.size.y/2, myRenderer.bounds.size.y/2), zOffset);
+        Debug.Log(myRenderer.bounds.size.z);
+        spawnLocation = new Vector3(xOffset, Random.Range(0, myRenderer.bounds.size.y), Random.Range(-myRenderer.bounds.size.z / 2, myRenderer.bounds.size.z / 2));
     }
-
-    private void InstantiateCrack()
+    private void InstantiateCrack(Vector3 mySpawnLocation)
     {
-        Instantiate(crackPrefab, spawnLocation, Quaternion.identity);
+
+        GameObject crack = Instantiate(crackPrefab, Vector3.zero, Quaternion.identity);
+        crack.transform.SetParent(transform);
+        crack.transform.localPosition = spawnLocation;
+        Vector3 newRot = new Vector3(crack.transform.rotation.x, 90, crack.transform.rotation.z);
+        crack.transform.localRotation = Quaternion.Euler(newRot);
         activeCracks++;
     }
 }
