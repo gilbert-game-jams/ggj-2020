@@ -49,6 +49,7 @@ public class CrackBehaviour : MonoBehaviour
             case CrackState.Nonexistent:
                 _repairedCrack.SetActive(false);
                 _openCrack.SetActive(false);
+                this.gameObject.SetActive(false);
                 break;
         }
     }
@@ -67,7 +68,7 @@ public class CrackBehaviour : MonoBehaviour
             _timeSinceFixed += Time.deltaTime;
             if(_timeSinceFixed > _timeUntilDespawn) {
                 FMODUnity.RuntimeManager.PlayOneShot(repairCompleteSoundEvent, transform.position);
-                this.gameObject.SetActive(false);
+                SetCrackState(CrackState.Nonexistent);
             }
         }
     }

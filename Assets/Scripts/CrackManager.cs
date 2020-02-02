@@ -38,7 +38,7 @@ public class CrackManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate() 
+    private void Update() 
     {
         _timeUntilSpawn -= Time.deltaTime;
         if(_timeUntilSpawn <= 0.0f) 
@@ -55,6 +55,7 @@ public class CrackManager : MonoBehaviour
     }
 
     void OnCrackStateChanged(CrackBehaviour crack, CrackBehaviour.CrackState prevState, CrackBehaviour.CrackState newState) {
+        
         switch(prevState) {
             case CrackBehaviour.CrackState.Open:
                 OpenCracks.Remove(crack);
@@ -75,6 +76,7 @@ public class CrackManager : MonoBehaviour
                 RepairedCracks.Add(crack);
                 break;
             case CrackBehaviour.CrackState.Nonexistent:
+                Debug.Log("hej hej");
                 NonexistentCracks.Add(crack);
                 break;
         }
