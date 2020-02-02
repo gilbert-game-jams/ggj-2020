@@ -188,16 +188,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.001
       objectReference: {fileID: 0}
-    - target: {fileID: 8110410048688504664, guid: 72da5f240745b8a48aad59b6c18a1d5f,
-        type: 3}
-      propertyPath: _maxArrowSpeed
-      value: 41.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8110410048688504664, guid: 72da5f240745b8a48aad59b6c18a1d5f,
-        type: 3}
-      propertyPath: _minArrowSpeed
-      value: 14.6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72da5f240745b8a48aad59b6c18a1d5f, type: 3}
 --- !u!1 &238160219 stripped
@@ -222,7 +212,7 @@ MonoBehaviour:
   _timeDisplay: {fileID: 1985863421}
   _endOfGameMessage: {fileID: 1405917049}
   _health: 1000
-  _penalty: 5
+  _penalty: 3
   _penaltyCooldown: 1
   _time: 300
 --- !u!1 &265497011
@@ -603,6 +593,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1288691472, guid: 2202af6ac7fa6f94f801acd9d92c090e, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b90f4a12dec1c5d409558b8326f500d0,
+        type: 2}
+    - target: {fileID: 1288691472, guid: 2202af6ac7fa6f94f801acd9d92c090e, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2913164708319713604, guid: b90f4a12dec1c5d409558b8326f500d0,
+        type: 2}
+    - target: {fileID: 1288691472, guid: 2202af6ac7fa6f94f801acd9d92c090e, type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288691472, guid: 2202af6ac7fa6f94f801acd9d92c090e, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1405917049, guid: 2202af6ac7fa6f94f801acd9d92c090e, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b90f4a12dec1c5d409558b8326f500d0,
+        type: 2}
+    - target: {fileID: 1405917049, guid: 2202af6ac7fa6f94f801acd9d92c090e, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1405917049, guid: 2202af6ac7fa6f94f801acd9d92c090e, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6384694694871155043, guid: 2202af6ac7fa6f94f801acd9d92c090e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -707,6 +728,24 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985863421, guid: 2202af6ac7fa6f94f801acd9d92c090e, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b90f4a12dec1c5d409558b8326f500d0,
+        type: 2}
+    - target: {fileID: 1985863421, guid: 2202af6ac7fa6f94f801acd9d92c090e, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2913164708319713604, guid: b90f4a12dec1c5d409558b8326f500d0,
+        type: 2}
+    - target: {fileID: 1985863421, guid: 2202af6ac7fa6f94f801acd9d92c090e, type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985863421, guid: 2202af6ac7fa6f94f801acd9d92c090e, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2202af6ac7fa6f94f801acd9d92c090e, type: 3}
@@ -1146,31 +1185,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1855049876543694695, guid: f4a329573491df0448e2437988690106,
+    - target: {fileID: 3158143380468579874, guid: f4a329573491df0448e2437988690106,
         type: 3}
-      propertyPath: OverrideMaxDistance
-      value: 37.1
+      propertyPath: _spawnTime
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 7381630906497650463, guid: f4a329573491df0448e2437988690106,
-        type: 3}
-      propertyPath: OverrideAttenuation
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7381630906497650463, guid: f4a329573491df0448e2437988690106,
-        type: 3}
-      propertyPath: OverrideMaxDistance
-      value: 35.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938894116946454755, guid: f4a329573491df0448e2437988690106,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 18dff2339be80c34f8b55b3963ba3d65, type: 2}
-    - target: {fileID: 3720291450756449981, guid: f4a329573491df0448e2437988690106,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 12af0284fa59bcb488f8339570359d64, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4a329573491df0448e2437988690106, type: 3}
 --- !u!1001 &5715252658312582511

@@ -40,8 +40,8 @@ public class GameManagerBehaviour : MonoBehaviour
                 _timeUntilPenalty = _penaltyCooldown;
             }
         
-            _healthDisplay.text = ((int) _health).ToString();
-            _timeDisplay.text = ((int) _time).ToString();
+            _healthDisplay.text = "Health: " + ((int) _health).ToString();
+            _timeDisplay.text = "Time: " + ((int) _time).ToString();
         } else {
             if (Input.GetKeyDown(KeyCode.R)) {
                 SceneManager.LoadScene( SceneManager.GetActiveScene().name );
