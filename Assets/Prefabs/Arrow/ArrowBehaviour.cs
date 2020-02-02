@@ -19,8 +19,11 @@ public class ArrowBehaviour : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision other) {
-        FMODUnity.RuntimeManager.PlayOneShot(hitCrack, transform.position);
-        if(other.gameObject.GetComponent<ArrowBehaviour>() == null) { 
+        if (other.gameObject.GetComponent<CrackBehaviour>() != null)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot(hitCrack, transform.position);
+        }
+        if (other.gameObject.GetComponent<ArrowBehaviour>() == null) { 
             Destroy(gameObject);
         }
     }

@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e088cdfd044ae0a44a8dc302a2c88186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitCrack: 
+  hitCrack: event:/Sounds/hitCrack
 --- !u!65 &1250267183145239368
 BoxCollider:
   m_ObjectHideFlags: 0
