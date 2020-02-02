@@ -8,30 +8,35 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Animator))]
 public class Chef : MonoBehaviour
 {
-    UnityEvent DeathEvent = new UnityEvent();   
-    CrackManager crackManager;
-    Vector3 HomePos;
-    NavMeshAgent NavAgent;
-    CrackBehaviour Crack;
-    Vector3 PatrolWaypoint = Vector3.zero;
-    enum ChefState {GoToTarget, GoHome,Patrol, Eat};
-    ChefState state = ChefState.GoToTarget;
+    public delegate void ChefDiedDelegate(Chef chef);
+    public event ChefDiedDelegate ChefDied;
+
+    UnityEvent _DeathEvent = new UnityEvent();   
+    CrackManager _crackManager;
+    Vector3 _HomePos;
+    NavMeshAgent _NavAgent;
+    CrackBehaviour _Crack;
+    Vector3 _PatrolWaypoint = Vector3.zero;
+    enum ChefState {GoToTarget, GoHome,Patrol, Eat, Dead};
+    ChefState _state = ChefState.GoToTarget;
 
     [SerializeField]
-    float TimeToEat = 5;
-    float EatTimer;
+    float _TimeToEat = 5;
+    float _EatTimer;
     [SerializeField]
-    Animator ChefAnimator;
+    Animator _ChefAnimator;
     [SerializeField]
-    Transform MeshTransform;
-
+    Transform _MeshTransform;
+    float _timeUntilDead = 1.0f;
+    float _prevZPos;
     // Start is called before the first frame update
     void Start()
     {
-        HomePos = transform.position;
-        crackManager = FindObjectOfType<CrackManager>();
-      NavAgent = GetComponent<NavMeshAgent>();
-      ChangeState(ChefState.Patrol);
+        _prevZPos = transform.position.z;
+        _HomePos = transform.position;
+        _crackManager = FindObjectOfType<CrackManager>();
+        _NavAgent = GetComponent<NavMeshAgent>();
+        ChangeState(ChefState.Patrol);
     }
 
     // Update is called once per frame
@@ -57,59 +62,65 @@ public class Chef : MonoBehaviour
             }
         }*/
 
-        switch(state)
+        switch(_state)
         {
-        case  ChefState.GoHome:
-         break;
-         case ChefState.GoToTarget:
-        if(Crack == null)
-        {
-            ChangeState(ChefState.Patrol);
-            return;
-        }
-        if(!ReachedTarget(Crack.transform.position))
-        return;
-           ChangeState(ChefState.Eat);
-         break;
-           
-           case ChefState.Patrol:
-            
-             if(ReachedTarget(PatrolWaypoint))
-             {
-                if(crackManager.TryGetCrack(out Crack))
+            case ChefState.GoHome:
+                break;
+
+            case ChefState.GoToTarget:
+                if(_Crack == null)
                 {
-                    if(Crack != null)
+                    ChangeState(ChefState.Patrol);
+                    return;
+                }
+                if(!ReachedTarget(_Crack.transform.position))
+                    return;
+                    ChangeState(ChefState.Eat);
+                    break;
+                
+            case ChefState.Patrol:
+                    
+                if(ReachedTarget(_PatrolWaypoint))
+                {
+                    if(_crackManager.TryGetCrack(out _Crack))
                     {
-                        Crack.Take();
-                        NavAgent.SetDestination(Crack.transform.position);
-                        ChangeState(ChefState.GoToTarget);
-                        return;
+                        if(_Crack != null)
+                        {
+                            _Crack.Take();
+                            _NavAgent.SetDestination(_Crack.transform.position);
+                    ChangeState(ChefState.GoToTarget);
+                    return;
                     }
                 }
-                PatrolWaypoint = crackManager.GetPatrolPoint();
-                NavAgent.SetDestination(PatrolWaypoint);
-             }
-           break;
+                _PatrolWaypoint = _crackManager.GetPatrolPoint();
+                _NavAgent.SetDestination(_PatrolWaypoint);
+                }
+                break;
+
             case ChefState.Eat:
 
-            if(!Crack.gameObject.activeSelf)
-            {
-                NavAgent.isStopped = false;
-                ChangeState(ChefState.Patrol);
-                return;
-            }
+                if(!_Crack.gameObject.activeSelf)
+                {
+                    _NavAgent.isStopped = false;
+                    ChangeState(ChefState.Patrol);
+                    return;
+                }
 
-            if(EatTimer < Time.time)
-            {
-                Crack.UndoRepair();
-                NavAgent.isStopped = false;
-                ChangeState(ChefState.Patrol);
-            } 
-            break;
+                if(_EatTimer < Time.time)
+                {
+                    _Crack.UndoRepair();
+                    _NavAgent.isStopped = false;
+                    ChangeState(ChefState.Patrol);
+                } 
+                break;
+            case ChefState.Dead:
+                _timeUntilDead -= Time.deltaTime;
+                if(_timeUntilDead < 0) {
+                    ChefDied.Invoke(this);
+                    Destroy(this.gameObject);
+                }
+                break;
         }
-
-        
-       
     }
 
 
@@ -119,22 +130,22 @@ public class Chef : MonoBehaviour
         {
             case ChefState.GoHome:
             GoHome();
-            state = ChefState.GoHome;
+            _state = ChefState.GoHome;
             break;
             case ChefState.GoToTarget:
-            NavAgent.SetDestination(Crack.transform.position);
-            state = ChefState.GoToTarget;
+            _NavAgent.SetDestination(_Crack.transform.position);
+            _state = ChefState.GoToTarget;
             break;
             case ChefState.Patrol:
-            PatrolWaypoint = crackManager.GetPatrolPoint();
-            NavAgent.SetDestination(PatrolWaypoint);
-            state = ChefState.Patrol;
+            _PatrolWaypoint = _crackManager.GetPatrolPoint();
+            _NavAgent.SetDestination(_PatrolWaypoint);
+            _state = ChefState.Patrol;
             break;
             case ChefState.Eat:
-            ChefAnimator.SetBool("Stealing",true);
-            NavAgent.isStopped = true;
-            EatTimer = Time.time  + TimeToEat;
-            state = ChefState.Eat;
+            _ChefAnimator.SetBool("Stealing",true);
+            _NavAgent.isStopped = true;
+            _EatTimer = Time.time  + _TimeToEat;
+            _state = ChefState.Eat;
             break;
         }
     }
@@ -149,40 +160,26 @@ public class Chef : MonoBehaviour
 
     void GoToTarget(Transform _target)
     {
-        NavAgent.SetDestination(_target.position);
+        _NavAgent.SetDestination(_target.position);
     }
 
     void GoHome()
     {
         Debug.Log("Go Home");
-        NavAgent.SetDestination(HomePos);
+        _NavAgent.SetDestination(_HomePos);
     }
 
    private void OnTriggerEnter(Collider other) 
    {
-       Debug.Log("hi");
        if(other.GetComponent<ArrowBehaviour>() != null)
        {
-           ChefAnimator.SetTrigger("Hit");
-           if(DeathEvent.GetPersistentEventCount() <= 0)
-           return;
-           DeathEvent.Invoke();
-           Destroy(this);
+           _ChefAnimator.SetTrigger("Hit");
+           _state = ChefState.Dead;
+           _NavAgent.isStopped = true;
        }
    }
 
     private void OnTriggerExit(Collider other) {
         Debug.Log("Bye");
     }
-
-   void SubscribeToDeathEventChef(ChefManager _manager)
-   {
-       DeathEvent.AddListener(_manager.RemoveChef);
-   }
-
-    private void OnDisable()
-    {
-        DeathEvent.RemoveAllListeners();
-    }
-
 }

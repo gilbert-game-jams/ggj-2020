@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChefManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject ChefPrefab;
+    Chef ChefPrefab;
     [SerializeField]
     Transform [] SpawnPoints;
     [SerializeField]
@@ -16,27 +16,29 @@ public class ChefManager : MonoBehaviour
     [SerializeField]
     float MinSpawnDelay = 5;
     float SpawnTimer;
+    List<Chef> _chefs = new List<Chef>();
 
     private void Start() 
     {
         UpdateTimer();
     }
 
+    void OnChefDied(Chef chef) {
+        _chefs.Remove(chef);
+    }
+
     private void FixedUpdate()    
     {
         if(SpawnTimer < Time.time)
         {
-            if(NumberOfChefs < MaxChefs)
+            if(_chefs.Count < MaxChefs)
             {
-                SpawnChef();
+                var chef = SpawnChef();
+                chef.ChefDied += OnChefDied;
+                _chefs.Add(chef);
             }
             UpdateTimer();
         }
-    }
-
-    public void RemoveChef()
-    {
-        NumberOfChefs--;
     }
 
     void UpdateTimer()
@@ -44,12 +46,11 @@ public class ChefManager : MonoBehaviour
         SpawnTimer = Time.time + Random.Range(MinSpawnDelay,MaxSpawnDelay);
     }
 
-    void SpawnChef()
+    Chef SpawnChef()
     {
         int randomIndex = Random.Range(0,SpawnPoints.Length);
         Vector3 SpawnPos =  SpawnPoints[randomIndex].transform.position;
-        GameObject.Instantiate(ChefPrefab, SpawnPos, Quaternion.identity);
-        NumberOfChefs ++;
+        return GameObject.Instantiate(ChefPrefab, SpawnPos, Quaternion.identity);
     }
 
 }

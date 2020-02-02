@@ -65,7 +65,6 @@ public class BowBehaviour : MonoBehaviour
 
     void FireArrow(float drawFactor, float maxSpeed)
     {
-        Debug.Log("Fire");
         shootNoodleSoundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         shootNoodleSoundEvent.setParameterValue("BowChargeRelease", 1);
         var arrowSpawnTrans = _arrowSpawn.transform;
@@ -104,7 +103,6 @@ public class BowBehaviour : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(_arrowSpawn.transform.position);
         _timeSinceArrowFired += Time.deltaTime;
         if (Input.GetMouseButtonUp(0) && _loadedArrow != null) 
         {
