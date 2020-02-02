@@ -13,6 +13,7 @@ public class Chef : MonoBehaviour
     public event ChefDiedDelegate ChefDied;
     [FMODUnity.EventRef] public string ChefSpawn;
     [FMODUnity.EventRef] public string ChefTakeNoodle;
+    [FMODUnity.EventRef] public string ChefEat;
     [FMODUnity.EventRef] public string ChefDie;
     public ChefManager ChefManager;
 
@@ -55,6 +56,7 @@ public class Chef : MonoBehaviour
         }
         else
         {
+           // Debug.Log("Stop");
             _ChefAnimator.SetBool("Climb",false);
             _MeshTransform.localRotation = Quaternion.Euler(0,0,0);
         }
@@ -91,6 +93,8 @@ public class Chef : MonoBehaviour
                 if(!_Crack.gameObject.activeSelf)
                 {
                     _NavAgent.isStopped = false;
+                    //sound end
+                    _ChefAnimator.SetBool("Stealing",false);
                     ChangeState(ChefState.Patrol);
                     return;
                 }
@@ -98,6 +102,8 @@ public class Chef : MonoBehaviour
                 if(_EatTimer < Time.time)
                 {
                     _Crack.UndoRepair();
+                    _ChefAnimator.SetBool("Stealing",false);
+                    //sound end
                     FMODUnity.RuntimeManager.PlayOneShot(ChefTakeNoodle);
                     _NavAgent.isStopped = false;
                     ChangeState(ChefState.Patrol);
@@ -156,6 +162,7 @@ public class Chef : MonoBehaviour
             case ChefState.Eat:
                 _ChefAnimator.SetBool("Stealing",true);
                 _NavAgent.isStopped = true;
+                FMODUnity.RuntimeManager.PlayOneShot(ChefEat);
                 _EatTimer = Time.time  + _TimeToEat;
                 _state = ChefState.Eat;
                 break;
@@ -185,14 +192,14 @@ public class Chef : MonoBehaviour
 
     void GoHome()
     {
-        Debug.Log("Go Home");
+        //Debug.Log("Go Home");
         _NavAgent.SetDestination(_HomePos);
     }
 
     bool OnWall()
     {
        //Debug.Log("x " + transform.rotation.eulerAngles.x);
-        float minX = 0.1f;
+        float minX = 1f;
         return minX < transform.rotation.eulerAngles.x;//minY <transform.forward.y  || -minY > transform.forward.y ;
     }
    private void OnTriggerEnter(Collider other) 
