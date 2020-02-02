@@ -83,6 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChefSpawn: event:/Sounds/chefSpawn
   ChefTakeNoodle: event:/Sounds/chefTakeNoodle
+  ChefEat: event:/Sounds/chefEat
   ChefDie: event:/Sounds/chefDie
   ChefManager: {fileID: 0}
   _TimeToEat: 5
