@@ -1,5 +1,42 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8044604310860037919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/shootNoodle/BowChargeRelease
+  m_EditorClassIdentifier: 
+  Name: BowChargeRelease
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &-7979306895521309892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master Bank.bank
+  m_EditorClassIdentifier: 
+  Path: C:\MyStuff\Programming\GlobalGameJam\ggj-2020\Assets\Sounds\GameJam Noodle
+    FMOD\Build\Desktop\Master Bank.bank
+  lastModified: 637161783513990553
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 5685472
+  Exists: 1
 --- !u!114 &-7971395094192135847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,7 +72,8 @@ MonoBehaviour:
   Path: event:/Sounds/chefTakeNoodle
   guid: e18c81b04d087a468dc6e7fca566285b
   Banks:
-  - {fileID: -7971395094192135847}
+  - {fileID: -3226403832757799299}
+  - {fileID: -7979306895521309892}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -56,11 +94,48 @@ MonoBehaviour:
   m_Name: bank:/Master Bank.strings.bank
   m_EditorClassIdentifier: 
   Path: Assets\Sounds\GameJam Noodle FMOD\Build\Desktop\Master Bank.strings.bank
-  lastModified: 637161873857198156
+  lastModified: 637161783514000225
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 1076
+  Exists: 1
+--- !u!114 &-4039785008191755399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/shootNoodle/BowChargeRelease
+  m_EditorClassIdentifier: 
+  Name: BowChargeRelease
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 0
+--- !u!114 &-3226403832757799299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master Bank.bank
+  m_EditorClassIdentifier: 
+  Path: C:\MyStuff\Programming\GlobalGameJam\ggj-2020\Assets\Sounds\GameJam Noodle
+    FMOD\Build\Desktop\Master Bank.bank
+  lastModified: 637161783513990553
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 5685472
   Exists: 1
 --- !u!114 &-2585761923899564398
 MonoBehaviour:
@@ -77,12 +152,13 @@ MonoBehaviour:
   Path: event:/Sounds/shootNoodle
   guid: 21cc5f513ab5f5489a05a25721abc6f9
   Banks:
-  - {fileID: -7971395094192135847}
+  - {fileID: -3226403832757799299}
+  - {fileID: -7979306895521309892}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 8599015511027641116}
+  - {fileID: -8044604310860037919}
   MinDistance: 0
   MaxDistance: 0
   Length: 2500
@@ -101,7 +177,8 @@ MonoBehaviour:
   Path: event:/Sounds/chefSpawn
   guid: b3971535b9decb478e203ff2a03fdf0c
   Banks:
-  - {fileID: -7971395094192135847}
+  - {fileID: -3226403832757799299}
+  - {fileID: -7979306895521309892}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -123,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -6632990704027095688}
-  - {fileID: -7971395094192135847}
+  - {fileID: -7979306895521309892}
   EditorEvents:
   - {fileID: 8050544997036814960}
   - {fileID: -2585761923899564398}
@@ -133,10 +210,10 @@ MonoBehaviour:
   - {fileID: 6228532285546201917}
   - {fileID: -7580628655115422058}
   MasterBanks:
-  - {fileID: -7971395094192135847}
+  - {fileID: -7979306895521309892}
   StringsBanks:
   - {fileID: -6632990704027095688}
-  stringsBankWriteTime: 637161873857198156
+  stringsBankWriteTime: 637161783514000225
   cacheVersion: 3
 --- !u!114 &90157494659365415
 MonoBehaviour:
@@ -153,7 +230,8 @@ MonoBehaviour:
   Path: event:/Music/BackgroundMusic
   guid: 40811d20de9fd24aa8cc5f173e5496c5
   Banks:
-  - {fileID: -7971395094192135847}
+  - {fileID: -3226403832757799299}
+  - {fileID: -7979306895521309892}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -176,7 +254,8 @@ MonoBehaviour:
   Path: event:/Sounds/spawnCrack
   guid: c3b118f5d9442546aa4a6476c0df12a3
   Banks:
-  - {fileID: -7971395094192135847}
+  - {fileID: -3226403832757799299}
+  - {fileID: -7979306895521309892}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -199,7 +278,8 @@ MonoBehaviour:
   Path: event:/Sounds/hitCrack
   guid: 53206b90bcb80740b452d340ce4668bb
   Banks:
-  - {fileID: -7971395094192135847}
+  - {fileID: -3226403832757799299}
+  - {fileID: -7979306895521309892}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -222,7 +302,8 @@ MonoBehaviour:
   Path: event:/Sounds/repairCrack
   guid: 0b6230b93b15f9409401126ed5f0c7c0
   Banks:
-  - {fileID: -7971395094192135847}
+  - {fileID: -3226403832757799299}
+  - {fileID: -7979306895521309892}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
