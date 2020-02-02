@@ -14,6 +14,8 @@ public class Chef : MonoBehaviour
     [FMODUnity.EventRef] public string ChefSpawn;
     [FMODUnity.EventRef] public string ChefTakeNoodle;
     [FMODUnity.EventRef] public string ChefEat;
+    private FMOD.Studio.EventInstance ChefEatInstance;
+
     [FMODUnity.EventRef] public string ChefDie;
     public ChefManager ChefManager;
 
@@ -93,7 +95,7 @@ public class Chef : MonoBehaviour
                 if(!_Crack.gameObject.activeSelf)
                 {
                     _NavAgent.isStopped = false;
-                    //sound end
+                    ChefEatInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
                     _ChefAnimator.SetBool("Stealing",false);
                     ChangeState(ChefState.Patrol);
                     return;
@@ -103,8 +105,9 @@ public class Chef : MonoBehaviour
                 {
                     _Crack.UndoRepair();
                     _ChefAnimator.SetBool("Stealing",false);
-                    //sound end
+                    ChefEatInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
                     FMODUnity.RuntimeManager.PlayOneShot(ChefTakeNoodle);
+
                     _NavAgent.isStopped = false;
                     ChangeState(ChefState.Patrol);
                 } 
@@ -162,7 +165,8 @@ public class Chef : MonoBehaviour
             case ChefState.Eat:
                 _ChefAnimator.SetBool("Stealing",true);
                 _NavAgent.isStopped = true;
-                FMODUnity.RuntimeManager.PlayOneShot(ChefEat);
+                ChefEatInstance = FMODUnity.RuntimeManager.CreateInstance(ChefEat);
+                ChefEatInstance.start();
                 _EatTimer = Time.time  + _TimeToEat;
                 _state = ChefState.Eat;
                 break;
