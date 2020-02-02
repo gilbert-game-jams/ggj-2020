@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -10,13 +11,15 @@ public class Chef : MonoBehaviour
 {
     public delegate void ChefDiedDelegate(Chef chef);
     public event ChefDiedDelegate ChefDied;
+    
+    public ChefManager ChefManager;
 
     UnityEvent _DeathEvent = new UnityEvent();   
     CrackManager _crackManager;
     Vector3 _HomePos;
     NavMeshAgent _NavAgent;
     CrackBehaviour _Crack;
-    Vector3 _PatrolWaypoint = Vector3.zero;
+    GameObject _PatrolWaypoint;
     enum ChefState {GoToTarget, GoHome,Patrol, Eat, Dead};
     ChefState _state = ChefState.GoToTarget;
 
@@ -28,11 +31,11 @@ public class Chef : MonoBehaviour
     [SerializeField]
     Transform _MeshTransform;
     float _timeUntilDead = 1.0f;
-    float _prevZPos;
+    static int _currentPatrolPointIndex = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        _prevZPos = transform.position.z;
         _HomePos = transform.position;
         _crackManager = FindObjectOfType<CrackManager>();
         _NavAgent = GetComponent<NavMeshAgent>();
@@ -42,26 +45,6 @@ public class Chef : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        float angle = Vector3.Angle(transform.position + Vector3.right, transform.forward);
-       /* if(false)
-        {
-            Debug.Log("TryToChagne");
-            if(MeshTransform.localRotation.x < 90)
-            {
-                Debug.Log("StartClimb");
-            MeshTransform.localRotation = Quaternion.Euler(90f,transform.rotation.y,transform.rotation.z);
-            ChefAnimator.SetBool("Climb",true);
-            }
-        }
-        else
-        {
-             if(MeshTransform.localRotation.x >= 90)
-            {
-            MeshTransform.localRotation = Quaternion.Euler(0,transform.rotation.y,transform.rotation.z);
-            ChefAnimator.SetBool("Climb",false);
-            }
-        }*/
-
         switch(_state)
         {
             case ChefState.GoHome:
@@ -79,21 +62,15 @@ public class Chef : MonoBehaviour
                     break;
                 
             case ChefState.Patrol:
-                    
-                if(ReachedTarget(_PatrolWaypoint))
-                {
-                    if(_crackManager.TryGetCrack(out _Crack))
-                    {
-                        if(_Crack != null)
-                        {
-                            _Crack.Take();
-                            _NavAgent.SetDestination(_Crack.transform.position);
+                _Crack = GetClosestAvailableCrack();
+                
+                if(_Crack != null) {
                     ChangeState(ChefState.GoToTarget);
-                    return;
-                    }
                 }
-                _PatrolWaypoint = _crackManager.GetPatrolPoint();
-                _NavAgent.SetDestination(_PatrolWaypoint);
+                else if (ReachedTarget(_PatrolWaypoint.transform.position))
+                {
+                    _PatrolWaypoint = GetNextPatrolTarget();
+                    _NavAgent.SetDestination(_PatrolWaypoint.transform.position);
                 }
                 break;
 
@@ -123,39 +100,70 @@ public class Chef : MonoBehaviour
         }
     }
 
+    CrackBehaviour GetClosestAvailableCrack() {
+        CrackBehaviour closestCrack = null;
+        float smallestDist = 1000000;
+        foreach(var crack in _crackManager.RepairedCracks) {
+            var distToCrack = (transform.position - crack.transform.position).magnitude;
+
+            if(distToCrack < smallestDist && crack.CanTake()) {
+                smallestDist = distToCrack;
+                closestCrack = crack;
+            }
+        }
+        
+        if(closestCrack != null) {
+            closestCrack.Take();
+        }
+
+        return closestCrack;
+    }
+
 
     void ChangeState(ChefState _newState)
     {
         switch(_newState)
         {
             case ChefState.GoHome:
-            GoHome();
-            _state = ChefState.GoHome;
-            break;
+                GoHome();
+                _state = ChefState.GoHome;
+                break;
+
             case ChefState.GoToTarget:
-            _NavAgent.SetDestination(_Crack.transform.position);
-            _state = ChefState.GoToTarget;
-            break;
+                _NavAgent.SetDestination(_Crack.transform.position);
+                _state = ChefState.GoToTarget;
+                break;
+            
             case ChefState.Patrol:
-            _PatrolWaypoint = _crackManager.GetPatrolPoint();
-            _NavAgent.SetDestination(_PatrolWaypoint);
-            _state = ChefState.Patrol;
-            break;
+                _PatrolWaypoint = GetNextPatrolTarget();
+                _NavAgent.SetDestination(_PatrolWaypoint.transform.position);
+                _state = ChefState.Patrol;
+                break;
+
             case ChefState.Eat:
-            _ChefAnimator.SetBool("Stealing",true);
-            _NavAgent.isStopped = true;
-            _EatTimer = Time.time  + _TimeToEat;
-            _state = ChefState.Eat;
-            break;
+                _ChefAnimator.SetBool("Stealing",true);
+                _NavAgent.isStopped = true;
+                _EatTimer = Time.time  + _TimeToEat;
+                _state = ChefState.Eat;
+                break;
         }
     }
 
+    GameObject GetNextPatrolTarget() {
+        if(_currentPatrolPointIndex == 0) {
+            _currentPatrolPointIndex = 1;
+        } else {
+            _currentPatrolPointIndex = 0;
+        }
+        return ChefManager.PatrolPoints[_currentPatrolPointIndex];
+    }
 
     bool ReachedTarget(Vector3 _targetPos)
     {
-        float minDistance = 1.5f;
-        Vector3 deltaPos = _targetPos - transform.position;
-        return minDistance*minDistance > deltaPos.sqrMagnitude; 
+        float minDistance = 2f;
+        float distance = (_targetPos - transform.position).magnitude;
+        Debug.Log(distance);
+        return minDistance > distance; 
     }
 
     void GoToTarget(Transform _target)

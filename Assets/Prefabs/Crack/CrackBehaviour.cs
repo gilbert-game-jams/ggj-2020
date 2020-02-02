@@ -80,8 +80,7 @@ public class CrackBehaviour : MonoBehaviour
 
     public bool CanTake()
     {
-        bool canTake = CurrentState == CrackState.Repaired && !Taken ? true :false;
-        return canTake;
+        return CurrentState == CrackState.Repaired && !Taken;
     }
 
     public void Take()

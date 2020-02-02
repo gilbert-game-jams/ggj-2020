@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7417999106227830860}
   - component: {fileID: 7417999106227830863}
   - component: {fileID: 7417999106227830862}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: short chef
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6423486ac5d38134e9cd18f08d7eb512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChefManager: {fileID: 0}
   _TimeToEat: 5
   _ChefAnimator: {fileID: 6786237586615047626}
   _MeshTransform: {fileID: 7417999106227830899}

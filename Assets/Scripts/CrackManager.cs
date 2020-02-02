@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CrackManager : MonoBehaviour
 {
-
-    [SerializeField]
-    Transform[] PatrolPoints;
     [SerializeField]
     Transform CrackParent;
     
@@ -96,11 +93,5 @@ public class CrackManager : MonoBehaviour
             randomIndex = randomIndex%OpenCracks.Count;
         }
         return false;
-    }
-
-    public Vector3 GetPatrolPoint()
-    {
-        int randomIndex = Random.Range(0,PatrolPoints.Length);
-        return PatrolPoints[randomIndex].position;
     }
 }

@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class ChefManager : MonoBehaviour
 {
+    public GameObject[] PatrolPoints;
+
     [SerializeField]
     Chef ChefPrefab;
+
     [SerializeField]
     Transform [] SpawnPoints;
+
     [SerializeField]
     int MaxChefs = 10;
-    int NumberOfChefs = 0;
+
     [SerializeField]
     float MaxSpawnDelay = 20;
+
     [SerializeField]
     float MinSpawnDelay = 5;
+
+    int NumberOfChefs = 0;
     float SpawnTimer;
     List<Chef> _chefs = new List<Chef>();
 
@@ -34,6 +41,7 @@ public class ChefManager : MonoBehaviour
             if(_chefs.Count < MaxChefs)
             {
                 var chef = SpawnChef();
+                chef.ChefManager = this;
                 chef.ChefDied += OnChefDied;
                 _chefs.Add(chef);
             }
