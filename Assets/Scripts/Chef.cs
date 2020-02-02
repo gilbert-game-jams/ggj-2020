@@ -11,7 +11,8 @@ public class Chef : MonoBehaviour
 {
     public delegate void ChefDiedDelegate(Chef chef);
     public event ChefDiedDelegate ChefDied;
-    
+    [FMODUnity.EventRef] public string ChefSpawn;
+    [FMODUnity.EventRef] public string ChefTakeNoodle;
     public ChefManager ChefManager;
 
     UnityEvent _DeathEvent = new UnityEvent();   
@@ -36,6 +37,7 @@ public class Chef : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FMODUnity.RuntimeManager.PlayOneShot(ChefSpawn);
         _HomePos = transform.position;
         _crackManager = FindObjectOfType<CrackManager>();
         _NavAgent = GetComponent<NavMeshAgent>();
@@ -150,6 +152,7 @@ public class Chef : MonoBehaviour
                 break;
 
             case ChefState.Eat:
+                FMODUnity.RuntimeManager.PlayOneShot(ChefTakeNoodle);
                 _ChefAnimator.SetBool("Stealing",true);
                 _NavAgent.isStopped = true;
                 _EatTimer = Time.time  + _TimeToEat;
