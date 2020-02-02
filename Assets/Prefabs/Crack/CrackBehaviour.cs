@@ -28,7 +28,6 @@ public class CrackBehaviour : MonoBehaviour
     {
         _repairedCrack.SetActive(false);
         _openCrack.SetActive(false);
-        spawnSoundInstance = FMODUnity.RuntimeManager.CreateInstance(spawnSoundEvent);
     }
 
     public void SetCrackState(CrackState newState) {
@@ -39,6 +38,7 @@ public class CrackBehaviour : MonoBehaviour
             case CrackState.Open:
                 _repairedCrack.SetActive(false);
                 _openCrack.SetActive(true);
+                spawnSoundInstance = FMODUnity.RuntimeManager.CreateInstance(spawnSoundEvent);
                 spawnSoundInstance.start();
                 break;
             case CrackState.Repaired:

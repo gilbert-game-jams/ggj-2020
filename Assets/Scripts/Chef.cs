@@ -45,6 +45,16 @@ public class Chef : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+        if(OnWall())
+        {
+            _ChefAnimator.SetBool("Climb",true);
+            _MeshTransform.localRotation = Quaternion.Euler(90,0,0);
+        }
+        else
+        {
+            _ChefAnimator.SetBool("Climb",false);
+            _MeshTransform.localRotation = Quaternion.Euler(0,0,0);
+        }
         switch(_state)
         {
             case ChefState.GoHome:
@@ -63,11 +73,10 @@ public class Chef : MonoBehaviour
                 
             case ChefState.Patrol:
                 _Crack = GetClosestAvailableCrack();
-                
                 if(_Crack != null) {
                     ChangeState(ChefState.GoToTarget);
                 }
-                else if (ReachedTarget(_PatrolWaypoint.transform.position))
+                if (ReachedTarget(_PatrolWaypoint.transform.position))
                 {
                     _PatrolWaypoint = GetNextPatrolTarget();
                     _NavAgent.SetDestination(_PatrolWaypoint.transform.position);
@@ -162,7 +171,6 @@ public class Chef : MonoBehaviour
     {
         float minDistance = 2f;
         float distance = (_targetPos - transform.position).magnitude;
-        Debug.Log(distance);
         return minDistance > distance; 
     }
 
@@ -177,6 +185,12 @@ public class Chef : MonoBehaviour
         _NavAgent.SetDestination(_HomePos);
     }
 
+    bool OnWall()
+    {
+       //Debug.Log("x " + transform.rotation.eulerAngles.x);
+        float minX = 0.1f;
+        return minX < transform.rotation.eulerAngles.x;//minY <transform.forward.y  || -minY > transform.forward.y ;
+    }
    private void OnTriggerEnter(Collider other) 
    {
        if(other.GetComponent<ArrowBehaviour>() != null)
