@@ -16,42 +16,32 @@ public class ChefManager : MonoBehaviour
     int MaxChefs = 10;
 
     [SerializeField]
-    float MaxSpawnDelay = 20;
-
-    [SerializeField]
-    float MinSpawnDelay = 5;
+    float _spawnTime = 10f;
 
     int NumberOfChefs = 0;
-    float SpawnTimer;
     List<Chef> _chefs = new List<Chef>();
+    float _timeUntilSpawn;
 
-    private void Start() 
-    {
-        UpdateTimer();
+    void Awake() {
+        _timeUntilSpawn = _spawnTime;
     }
 
     void OnChefDied(Chef chef) {
         _chefs.Remove(chef);
+        _timeUntilSpawn = _spawnTime;
     }
 
     private void FixedUpdate()    
     {
-        if(SpawnTimer < Time.time)
+        _timeUntilSpawn -= Time.deltaTime;
+        if(_timeUntilSpawn < 0 && _chefs.Count < MaxChefs)
         {
-            if(_chefs.Count < MaxChefs)
-            {
-                var chef = SpawnChef();
-                chef.ChefManager = this;
-                chef.ChefDied += OnChefDied;
-                _chefs.Add(chef);
-            }
-            UpdateTimer();
+            var chef = SpawnChef();
+            chef.ChefManager = this;
+            chef.ChefDied += OnChefDied;
+            _chefs.Add(chef);
+            _timeUntilSpawn = _spawnTime;
         }
-    }
-
-    void UpdateTimer()
-    {
-        SpawnTimer = Time.time + Random.Range(MinSpawnDelay,MaxSpawnDelay);
     }
 
     Chef SpawnChef()
