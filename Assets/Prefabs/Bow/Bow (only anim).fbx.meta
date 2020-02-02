@@ -106,7 +106,7 @@ ModelImporter:
       takeName: Bow_Shoot
       internalID: 0
       firstFrame: 0
-      lastFrame: 50
+      lastFrame: 23
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -135,7 +135,7 @@ ModelImporter:
       takeName: Bow_StopAim
       internalID: 0
       firstFrame: 0
-      lastFrame: 60
+      lastFrame: 45
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
