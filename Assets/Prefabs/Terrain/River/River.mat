@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Waterfall
+  m_Name: River
   m_Shader: {fileID: -6465566751694194690, guid: 701cd2de02f55c648b3cc0ddaf9bf48a,
     type: 3}
   m_ShaderKeywords: 
@@ -115,10 +115,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_65C6F896: 1
-    - Vector1_6844BFF5: 3
-    - Vector1_87533E50: 0.6
-    - Vector1_A8681F58: 0.5
+    - Vector1_65C6F896: 2
+    - Vector1_6844BFF5: 5
+    - Vector1_87533E50: 0.1
+    - Vector1_A8681F58: 0.2
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -239,7 +239,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Vector3_B55637D3: {r: 0, g: 1, b: 0, a: 0}
+    - Vector3_B55637D3: {r: 0, g: -1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 16287039283555629, guid: 3bc344605573899449f0bcce54b188c9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.712578
+      value: -11.02
       objectReference: {fileID: 0}
     - target: {fileID: 16287039283555629, guid: 3bc344605573899449f0bcce54b188c9,
         type: 3}
@@ -178,6 +178,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3201566386933187132, guid: 3bc344605573899449f0bcce54b188c9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 153851525713606756, guid: 3bc344605573899449f0bcce54b188c9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 153851525713606756, guid: 3bc344605573899449f0bcce54b188c9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504758191, guid: 3bc344605573899449f0bcce54b188c9, type: 3}
+      propertyPath: _spawnTime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2009028240, guid: 3bc344605573899449f0bcce54b188c9, type: 3}
       propertyPath: _minSpawnTime
       value: 8.8
@@ -210,20 +229,15 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 153851525713606756, guid: 3bc344605573899449f0bcce54b188c9,
+    - target: {fileID: 3633715112962986218, guid: 3bc344605573899449f0bcce54b188c9,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -20.29
+      propertyPath: OverrideMaxDistance
+      value: 37.1
       objectReference: {fileID: 0}
-    - target: {fileID: 153851525713606756, guid: 3bc344605573899449f0bcce54b188c9,
+    - target: {fileID: 5594359827434453138, guid: 3bc344605573899449f0bcce54b188c9,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 11.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 3201566386933187132, guid: 3bc344605573899449f0bcce54b188c9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 10.68
+      propertyPath: OverrideMaxDistance
+      value: 35.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bc344605573899449f0bcce54b188c9, type: 3}
@@ -300,11 +314,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5432951866412047077, guid: b3b6d752576789644a944bc2fab3faa1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.01
+      objectReference: {fileID: 0}
     - target: {fileID: 7858525234863861060, guid: b3b6d752576789644a944bc2fab3faa1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e81299511b5dc0b4286a1c674c03cc13, type: 2}
+      objectReference: {fileID: 2100000, guid: 18dff2339be80c34f8b55b3963ba3d65, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3b6d752576789644a944bc2fab3faa1, type: 3}
 --- !u!4 &1029172358070740530 stripped
@@ -333,7 +352,7 @@ PrefabInstance:
     - target: {fileID: 4145798837055065901, guid: a026b5b387f93464bbd196cb35149763,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.487423
+      value: 5.97
       objectReference: {fileID: 0}
     - target: {fileID: 4145798837055065901, guid: a026b5b387f93464bbd196cb35149763,
         type: 3}
@@ -384,7 +403,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f8d34ebbaa9709740b28dee884aa9a87, type: 2}
+      objectReference: {fileID: 2100000, guid: 12af0284fa59bcb488f8339570359d64, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a026b5b387f93464bbd196cb35149763, type: 3}
 --- !u!4 &5836077345980843232 stripped
