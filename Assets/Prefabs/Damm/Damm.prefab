@@ -562,6 +562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 16287039283555629}
   - component: {fileID: 1504758191}
+  - component: {fileID: -6956008607867892768}
   m_Layer: 0
   m_Name: Damm
   m_TagString: Untagged
@@ -615,9 +616,21 @@ MonoBehaviour:
   - {fileID: 1017681338}
   - {fileID: 1898098451}
   - {fileID: 448466227}
-  MaxChefs: 5
-  MaxSpawnDelay: 3
-  MinSpawnDelay: 1
+  MaxChefs: 10
+  _spawnTime: 10
+--- !u!114 &-6956008607867892768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16287039283555632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f83dda94f6383a48b10e6e3b4957c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterFlowEvent: event:/Sounds/waterFlow
 --- !u!114 &213196907
 MonoBehaviour:
   m_ObjectHideFlags: 0
