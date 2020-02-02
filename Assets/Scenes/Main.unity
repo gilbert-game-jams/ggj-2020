@@ -237,7 +237,7 @@ MonoBehaviour:
   _timeDisplay: {fileID: 1985863421}
   _endOfGameMessage: {fileID: 1405917049}
   _health: 1000
-  _penalty: 3
+  _penalty: 2
   _penaltyCooldown: 1
   _time: 300
 --- !u!1 &265497011
@@ -1209,6 +1209,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158143380468579874, guid: f4a329573491df0448e2437988690106,
+        type: 3}
+      propertyPath: _spawnTime
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158143381039423773, guid: f4a329573491df0448e2437988690106,
+        type: 3}
+      propertyPath: _minSpawnTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158143381039423773, guid: f4a329573491df0448e2437988690106,
+        type: 3}
+      propertyPath: _maxSpawnTime
+      value: 8.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4a329573491df0448e2437988690106, type: 3}
