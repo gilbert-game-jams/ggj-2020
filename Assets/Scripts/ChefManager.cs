@@ -28,10 +28,9 @@ public class ChefManager : MonoBehaviour
 
     void OnChefDied(Chef chef) {
         _chefs.Remove(chef);
-        _timeUntilSpawn = _spawnTime;
     }
 
-    private void FixedUpdate()    
+    private void Update()    
     {
         _timeUntilSpawn -= Time.deltaTime;
         if(_timeUntilSpawn < 0 && _chefs.Count < MaxChefs)

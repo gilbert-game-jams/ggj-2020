@@ -617,7 +617,7 @@ MonoBehaviour:
   - {fileID: 1898098451}
   - {fileID: 448466227}
   MaxChefs: 10
-  _spawnTime: 10
+  _spawnTime: 2.5
 --- !u!114 &-6956008607867892768
 MonoBehaviour:
   m_ObjectHideFlags: 0

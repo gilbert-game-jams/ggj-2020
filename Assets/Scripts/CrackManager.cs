@@ -43,10 +43,12 @@ public class CrackManager : MonoBehaviour
         _timeUntilSpawn -= Time.deltaTime;
         if(_timeUntilSpawn <= 0.0f) 
         {
-            int crackIndex = Random.Range(0, NonexistentCracks.Count - 1);
+            int crackIndex = Random.Range(0, NonexistentCracks.Count);
 
-            var crack = NonexistentCracks[crackIndex];
-            crack.SetCrackState(CrackBehaviour.CrackState.Open);
+            if(crackIndex > 0) {
+                var crack = NonexistentCracks[crackIndex];
+                crack.SetCrackState(CrackBehaviour.CrackState.Open);
+            }
 
             _timeUntilSpawn = Random.Range(_minSpawnTime, _maxSpawnTime);
         }

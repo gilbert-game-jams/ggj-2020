@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: event:/Sounds/chefSpawn
   guid: b3971535b9decb478e203ff2a03fdf0c
   Banks:
-  - {fileID: -6718825578468765363}
+  - {fileID: -6645591762078193804}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -38,7 +38,7 @@ MonoBehaviour:
   Path: event:/Sounds/chefTakeNoodle
   guid: e18c81b04d087a468dc6e7fca566285b
   Banks:
-  - {fileID: -6718825578468765363}
+  - {fileID: -6645591762078193804}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -66,6 +66,26 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1540256
   Exists: 1
+--- !u!114 &-6645591762078193804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master Bank.bank
+  m_EditorClassIdentifier: 
+  Path: D:\Dokument\Unity projekt\ggj-2020\Assets\Sounds\GameJam Noodle FMOD\Build\Desktop\Master
+    Bank.bank
+  lastModified: 637162467730915720
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 2360576
+  Exists: 1
 --- !u!114 &-6563915396999454404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,12 +99,35 @@ MonoBehaviour:
   m_Name: bank:/Master Bank.strings.bank
   m_EditorClassIdentifier: 
   Path: Assets\Sounds\GameJam Noodle FMOD\Build\Desktop\Master Bank.strings.bank
-  lastModified: 637162395370511413
+  lastModified: 637162467730925815
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1164
+    Value: 1238
   Exists: 1
+--- !u!114 &-6277939663619934181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sounds/chefEat
+  m_EditorClassIdentifier: 
+  Path: event:/Sounds/chefEat
+  guid: b4972ddede56c74d94003a7e27ec961a
+  Banks:
+  - {fileID: -6645591762078193804}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1150
 --- !u!114 &-5202580627251252041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,7 +143,7 @@ MonoBehaviour:
   Path: event:/Sounds/chargeNoodle
   guid: 21cc5f513ab5f5489a05a25721abc6f9
   Banks:
-  - {fileID: -6718825578468765363}
+  - {fileID: -6645591762078193804}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -123,7 +166,7 @@ MonoBehaviour:
   Path: event:/Sounds/shootNoodle
   guid: a93902e841f4f94fa963ad2ff98ee0e4
   Banks:
-  - {fileID: -6718825578468765363}
+  - {fileID: -6645591762078193804}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -145,7 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -6563915396999454404}
-  - {fileID: -6718825578468765363}
+  - {fileID: -6645591762078193804}
   EditorEvents:
   - {fileID: 5003498075411580181}
   - {fileID: -5202580627251252041}
@@ -156,11 +199,13 @@ MonoBehaviour:
   - {fileID: 7669221801861297931}
   - {fileID: -7902356207910902443}
   - {fileID: 3104731383554882078}
+  - {fileID: 5931436678284123765}
+  - {fileID: -6277939663619934181}
   MasterBanks:
-  - {fileID: -6718825578468765363}
+  - {fileID: -6645591762078193804}
   StringsBanks:
   - {fileID: -6563915396999454404}
-  stringsBankWriteTime: 637162395370511413
+  stringsBankWriteTime: 637162467730925815
   cacheVersion: 3
 --- !u!114 &3104731383554882078
 MonoBehaviour:
@@ -177,7 +222,7 @@ MonoBehaviour:
   Path: event:/Sounds/chefDie
   guid: cd1c6cdf64e6234c9ceca5a6a515eaa5
   Banks:
-  - {fileID: -6718825578468765363}
+  - {fileID: -6645591762078193804}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -200,7 +245,7 @@ MonoBehaviour:
   Path: event:/Sounds/repairCrack
   guid: 0b6230b93b15f9409401126ed5f0c7c0
   Banks:
-  - {fileID: -6718825578468765363}
+  - {fileID: -6645591762078193804}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -208,6 +253,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 100
   Length: 1493
+--- !u!114 &5931436678284123765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sounds/waterFlow
+  m_EditorClassIdentifier: 
+  Path: event:/Sounds/waterFlow
+  guid: 7ab43392164fed4a95ffc89ebc43d18c
+  Banks:
+  - {fileID: -6645591762078193804}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 61393
 --- !u!114 &6147180527784489436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +311,7 @@ MonoBehaviour:
   Path: event:/Sounds/hitCrack
   guid: 53206b90bcb80740b452d340ce4668bb
   Banks:
-  - {fileID: -6718825578468765363}
+  - {fileID: -6645591762078193804}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -266,7 +334,7 @@ MonoBehaviour:
   Path: event:/Music/BackgroundMusic
   guid: 40811d20de9fd24aa8cc5f173e5496c5
   Banks:
-  - {fileID: -6718825578468765363}
+  - {fileID: -6645591762078193804}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -289,7 +357,7 @@ MonoBehaviour:
   Path: event:/Sounds/spawnCrack
   guid: c3b118f5d9442546aa4a6476c0df12a3
   Banks:
-  - {fileID: -6718825578468765363}
+  - {fileID: -6645591762078193804}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
