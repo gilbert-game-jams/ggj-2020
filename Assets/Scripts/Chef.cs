@@ -97,6 +97,7 @@ public class Chef : MonoBehaviour
                 if(_EatTimer < Time.time)
                 {
                     _Crack.UndoRepair();
+                    FMODUnity.RuntimeManager.PlayOneShot(ChefTakeNoodle);
                     _NavAgent.isStopped = false;
                     ChangeState(ChefState.Patrol);
                 } 
@@ -152,7 +153,6 @@ public class Chef : MonoBehaviour
                 break;
 
             case ChefState.Eat:
-                FMODUnity.RuntimeManager.PlayOneShot(ChefTakeNoodle);
                 _ChefAnimator.SetBool("Stealing",true);
                 _NavAgent.isStopped = true;
                 _EatTimer = Time.time  + _TimeToEat;

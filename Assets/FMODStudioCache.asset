@@ -59,11 +59,11 @@ MonoBehaviour:
   m_Name: bank:/Master Bank.strings.bank
   m_EditorClassIdentifier: 
   Path: Assets\Sounds\GameJam Noodle FMOD\Build\Desktop\Master Bank.strings.bank
-  lastModified: 637162384952371738
+  lastModified: 637162395370511413
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1130
+    Value: 1164
   Exists: 1
 --- !u!114 &-5202580627251252041
 MonoBehaviour:
@@ -83,7 +83,7 @@ MonoBehaviour:
   - {fileID: 6147180527784489436}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
@@ -135,12 +135,36 @@ MonoBehaviour:
   - {fileID: -9092497561146690895}
   - {fileID: 7669221801861297931}
   - {fileID: -7902356207910902443}
+  - {fileID: 3104731383554882078}
   MasterBanks:
   - {fileID: 6147180527784489436}
   StringsBanks:
   - {fileID: -6563915396999454404}
-  stringsBankWriteTime: 637162384952371738
+  stringsBankWriteTime: 637162395370511413
   cacheVersion: 3
+--- !u!114 &3104731383554882078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Sounds/chefDie
+  m_EditorClassIdentifier: 
+  Path: event:/Sounds/chefDie
+  guid: cd1c6cdf64e6234c9ceca5a6a515eaa5
+  Banks:
+  - {fileID: 6147180527784489436}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3000
 --- !u!114 &5003498075411580181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,11 +202,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:\MyStuff\Programming\GlobalGameJam\ggj-2020\Assets\Sounds\GameJam Noodle
     FMOD\Build\Desktop\Master Bank.bank
-  lastModified: 637162384952361783
+  lastModified: 637162395370501441
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 5660128
+    Value: 1540256
   Exists: 1
 --- !u!114 &6148884334740992451
 MonoBehaviour:
@@ -229,7 +253,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 346003
+  Length: 32307
 --- !u!114 &7669221801861297931
 MonoBehaviour:
   m_ObjectHideFlags: 0
