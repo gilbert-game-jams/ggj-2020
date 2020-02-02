@@ -114,7 +114,8 @@ public class Chef : MonoBehaviour
                 break;
             case ChefState.Dead:
                 _timeUntilDead -= Time.deltaTime;
-                if(_timeUntilDead < 0) {
+                ChefEatInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                if (_timeUntilDead < 0) {
                     ChefDied.Invoke(this);
                     Destroy(this.gameObject);
                 }
