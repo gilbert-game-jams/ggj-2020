@@ -4,48 +4,58 @@ using UnityEngine;
 
 public class CrackBehaviour : MonoBehaviour
 {
+    public delegate void CrackStateChangedDelegate(CrackBehaviour crack, CrackState prevState, CrackState newState);
+    public CrackStateChangedDelegate CrackStateChanged = delegate {};
+
     [FMODUnity.EventRef] public string spawnSoundEvent;
     private FMOD.Studio.EventInstance spawnSoundInstance;
     [FMODUnity.EventRef] public string hitSoundEvent;
     [FMODUnity.EventRef] public string repairCompleteSoundEvent;
 
-    public enum CrackState { Repaired, Broken }
+    public enum CrackState { Repaired, Open, Nonexistent }
 
-    public GameObject _fixedCrack;
-    public GameObject _brokenCrack;
+    public GameObject _repairedCrack;
+    public GameObject _openCrack;
     bool Taken = false;
     
     [Range(0f, 30f)]
     public float _timeUntilDespawn = 5.0f;
 
-    CrackState _crackState = CrackState.Broken;
+    [HideInInspector]
+    public CrackState CurrentState = CrackState.Nonexistent;
     float _timeSinceFixed = 0.0f;
-    private void Awake() {
-        SetCrackState(CrackState.Repaired);
+    private void Awake() 
+    {
+        _repairedCrack.SetActive(false);
+        _openCrack.SetActive(false);
         spawnSoundInstance = FMODUnity.RuntimeManager.CreateInstance(spawnSoundEvent);
     }
 
+    public void SetCrackState(CrackState newState) {
+        CrackStateChanged.Invoke(this, CurrentState, newState);
 
-
-    void SetCrackState(CrackState state) {
-        _crackState = state;
-        switch(state) {
-            case CrackState.Broken:
-                _fixedCrack.SetActive(false);
+        CurrentState = newState;
+        switch(newState) {
+            case CrackState.Open:
+                _repairedCrack.SetActive(false);
+                _openCrack.SetActive(true);
                 spawnSoundInstance.start();
-                _brokenCrack.SetActive(true);
                 break;
             case CrackState.Repaired:
-                _fixedCrack.SetActive(true);
+                _repairedCrack.SetActive(true);
+                _openCrack.SetActive(false);
                 spawnSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-                _brokenCrack.SetActive(false);
+                break;
+            case CrackState.Nonexistent:
+                _repairedCrack.SetActive(false);
+                _openCrack.SetActive(false);
                 break;
         }
     }
 
     private void OnCollisionEnter(Collision other) 
     {
-        if (other.gameObject.GetComponent<ArrowBehaviour>()) 
+        if (other.gameObject.GetComponent<ArrowBehaviour>() && CurrentState == CrackState.Open) 
         {
             SetCrackState(CrackState.Repaired);
         }
@@ -53,7 +63,7 @@ public class CrackBehaviour : MonoBehaviour
 
     private void Update() 
     {
-        if(_crackState == CrackState.Repaired) {
+        if(CurrentState == CrackState.Repaired) {
             _timeSinceFixed += Time.deltaTime;
             if(_timeSinceFixed > _timeUntilDespawn) {
                 FMODUnity.RuntimeManager.PlayOneShot(repairCompleteSoundEvent, transform.position);
@@ -65,13 +75,12 @@ public class CrackBehaviour : MonoBehaviour
     public void UndoRepair()
     {
         Taken = false;
-        SetCrackState(CrackState.Broken);
+        SetCrackState(CrackState.Open);
     }
-
 
     public bool CanTake()
     {
-        bool canTake = _crackState == CrackState.Repaired && !Taken ? true :false;
+        bool canTake = CurrentState == CrackState.Repaired && !Taken ? true :false;
         return canTake;
     }
 

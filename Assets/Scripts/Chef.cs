@@ -178,8 +178,4 @@ public class Chef : MonoBehaviour
            _NavAgent.isStopped = true;
        }
    }
-
-    private void OnTriggerExit(Collider other) {
-        Debug.Log("Bye");
-    }
 }

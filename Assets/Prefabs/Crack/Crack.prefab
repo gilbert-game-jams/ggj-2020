@@ -156,9 +156,10 @@ MonoBehaviour:
   spawnSoundEvent: event:/Sounds/spawnCrack
   hitSoundEvent: event:/Sounds/hitCrack
   repairCompleteSoundEvent: event:/Sounds/repairCrack
-  _fixedCrack: {fileID: 3272128284523652238}
-  _brokenCrack: {fileID: 3272128285025856269}
+  _repairedCrack: {fileID: 3272128284523652238}
+  _openCrack: {fileID: 3272128285025856269}
   _timeUntilDespawn: 30
+  CurrentState: 2
 --- !u!65 &5178394472448410067
 BoxCollider:
   m_ObjectHideFlags: 0

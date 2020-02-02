@@ -9,14 +9,26 @@ public class CrackManager : MonoBehaviour
     Transform[] PatrolPoints;
     [SerializeField]
     Transform CrackParent;
-    List<CrackBehaviour> DisabledCrackList = new List<CrackBehaviour>(); 
-    List<CrackBehaviour> EnabledCrackList = new List<CrackBehaviour>();
+    
+    [HideInInspector]
+    public List<CrackBehaviour> NonexistentCracks = new List<CrackBehaviour>(); 
+    
+    [HideInInspector]
+    public List<CrackBehaviour> OpenCracks = new List<CrackBehaviour>();
 
-    [SerializeField]
-    float CrackMaxDelay =1;
-    [SerializeField]
-    float CrackMinDelay=5;
-    float CrackTimer;
+    [HideInInspector]
+    public List<CrackBehaviour> RepairedCracks = new List<CrackBehaviour>();
+
+    [Range(1, 30)]
+    public float _minSpawnTime = 2f;
+
+    [Range(1, 30)]
+    public float _maxSpawnTime = 8f;
+    float _timeUntilSpawn = 0.0f;
+
+    private void OnValidate() {
+        _maxSpawnTime = _maxSpawnTime < _minSpawnTime ? _minSpawnTime : _maxSpawnTime;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -24,52 +36,64 @@ public class CrackManager : MonoBehaviour
         //add alla the cracks in the list 
         for(int i=0; i< CrackParent.childCount; i++)
         {
-         DisabledCrackList.Add(CrackParent.GetChild(i).GetComponent<CrackBehaviour>());
-         DisabledCrackList[i].gameObject.SetActive(false);   
+            NonexistentCracks.Add(CrackParent.GetChild(i).GetComponent<CrackBehaviour>());
+            NonexistentCracks[i].CrackStateChanged += OnCrackStateChanged;
         }
-        UpdateTimer();
     }
 
-    // Update is called once per frame
     private void FixedUpdate() 
     {
-        for(int i = 0;  i < EnabledCrackList.Count; i++)
+        _timeUntilSpawn -= Time.deltaTime;
+        if(_timeUntilSpawn <= 0.0f) 
         {
-            if(!EnabledCrackList[i].gameObject.activeSelf)
-            {
-                CrackBehaviour crackSwap = EnabledCrackList[i];
-                DisabledCrackList.Add(crackSwap);
-                EnabledCrackList.Remove(crackSwap);
-            }
+            int crackIndex = Random.Range(0, NonexistentCracks.Count - 1);
+
+            var crack = NonexistentCracks[crackIndex];
+            crack.SetCrackState(CrackBehaviour.CrackState.Open);
+
+            _timeUntilSpawn = Random.Range(_minSpawnTime, _maxSpawnTime);
         }
-        if(CrackTimer > Time.time)
-        return;
-        if(DisabledCrackList.Count == 0)
-        {
-            UpdateTimer();
-            return;
+    }
+
+    void OnCrackStateChanged(CrackBehaviour crack, CrackBehaviour.CrackState prevState, CrackBehaviour.CrackState newState) {
+        switch(prevState) {
+            case CrackBehaviour.CrackState.Open:
+                OpenCracks.Remove(crack);
+                break;
+            case CrackBehaviour.CrackState.Repaired:
+                RepairedCracks.Remove(crack);
+                break;
+            case CrackBehaviour.CrackState.Nonexistent:
+                NonexistentCracks.Remove(crack);
+                break;
         }
-        int randomIndex = Random.Range(0, DisabledCrackList.Count);
-        CrackBehaviour crackTemp = DisabledCrackList[randomIndex];
-        crackTemp.gameObject.SetActive(true);
-       EnabledCrackList.Add(crackTemp);
-       DisabledCrackList.Remove(crackTemp);
-       UpdateTimer();
+
+        switch(newState) {
+            case CrackBehaviour.CrackState.Open:
+                OpenCracks.Add(crack);
+                break;
+            case CrackBehaviour.CrackState.Repaired:
+                RepairedCracks.Add(crack);
+                break;
+            case CrackBehaviour.CrackState.Nonexistent:
+                NonexistentCracks.Add(crack);
+                break;
+        }
     }
 
     public bool TryGetCrack(out CrackBehaviour _crack)
     {
         _crack = null;
-        int randomIndex = Random.Range(0,EnabledCrackList.Count);
-        for(int i = 0; i < EnabledCrackList.Count; i++)
+        int randomIndex = Random.Range(0,OpenCracks.Count);
+        for(int i = 0; i < OpenCracks.Count; i++)
         {
-            if(EnabledCrackList[randomIndex].CanTake())
+            if(OpenCracks[randomIndex].CanTake())
             {
-                _crack = EnabledCrackList[randomIndex];
+                _crack = OpenCracks[randomIndex];
                 return true;
             }
             randomIndex++;
-            randomIndex = randomIndex%EnabledCrackList.Count;
+            randomIndex = randomIndex%OpenCracks.Count;
         }
         return false;
     }
@@ -79,9 +103,4 @@ public class CrackManager : MonoBehaviour
         int randomIndex = Random.Range(0,PatrolPoints.Length);
         return PatrolPoints[randomIndex].position;
     }
-    void UpdateTimer()
-    {
-        CrackTimer = Time.time+ Random.Range(CrackMinDelay,CrackMaxDelay);
-    }
-
 }
