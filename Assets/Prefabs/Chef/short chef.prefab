@@ -83,6 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChefSpawn: event:/Sounds/chefSpawn
   ChefTakeNoodle: event:/Sounds/chefTakeNoodle
+  ChefDie: event:/Sounds/chefDie
   ChefManager: {fileID: 0}
   _TimeToEat: 5
   _ChefAnimator: {fileID: 6786237586615047626}
@@ -94,6 +95,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7417999106227830899}
     m_Modifications:
+    - target: {fileID: 662646086860371109, guid: 04c4f4505cd344b43b650c351519b319,
+        type: 3}
+      propertyPath: m_Name
+      value: Fat_Cook_Prefab
+      objectReference: {fileID: 0}
     - target: {fileID: 4569298479453275830, guid: 04c4f4505cd344b43b650c351519b319,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -148,11 +154,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 662646086860371109, guid: 04c4f4505cd344b43b650c351519b319,
-        type: 3}
-      propertyPath: m_Name
-      value: Fat_Cook_Prefab
       objectReference: {fileID: 0}
     - target: {fileID: 5238327370656092441, guid: 04c4f4505cd344b43b650c351519b319,
         type: 3}

@@ -13,6 +13,7 @@ public class Chef : MonoBehaviour
     public event ChefDiedDelegate ChefDied;
     [FMODUnity.EventRef] public string ChefSpawn;
     [FMODUnity.EventRef] public string ChefTakeNoodle;
+    [FMODUnity.EventRef] public string ChefDie;
     public ChefManager ChefManager;
 
     UnityEvent _DeathEvent = new UnityEvent();   
@@ -199,6 +200,7 @@ public class Chef : MonoBehaviour
        if(other.GetComponent<ArrowBehaviour>() != null)
        {
            _ChefAnimator.SetTrigger("Hit");
+           FMODUnity.RuntimeManager.PlayOneShot(ChefDie);
            _state = ChefState.Dead;
            _NavAgent.isStopped = true;
        }
