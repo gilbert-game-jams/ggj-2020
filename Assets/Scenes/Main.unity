@@ -1161,6 +1161,16 @@ PrefabInstance:
       propertyPath: OverrideMaxDistance
       value: 35.2
       objectReference: {fileID: 0}
+    - target: {fileID: 5938894116946454755, guid: f4a329573491df0448e2437988690106,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18dff2339be80c34f8b55b3963ba3d65, type: 2}
+    - target: {fileID: 3720291450756449981, guid: f4a329573491df0448e2437988690106,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 12af0284fa59bcb488f8339570359d64, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4a329573491df0448e2437988690106, type: 3}
 --- !u!1001 &5715252658312582511
