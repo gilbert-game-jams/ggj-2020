@@ -11,7 +11,9 @@ public class Chef : MonoBehaviour
 {
     public delegate void ChefDiedDelegate(Chef chef);
     public event ChefDiedDelegate ChefDied;
-    
+    [FMODUnity.EventRef] public string ChefSpawn;
+    [FMODUnity.EventRef] public string ChefTakeNoodle;
+    [FMODUnity.EventRef] public string ChefDie;
     public ChefManager ChefManager;
 
     UnityEvent _DeathEvent = new UnityEvent();   
@@ -36,6 +38,7 @@ public class Chef : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FMODUnity.RuntimeManager.PlayOneShot(ChefSpawn);
         _HomePos = transform.position;
         _crackManager = FindObjectOfType<CrackManager>();
         _NavAgent = GetComponent<NavMeshAgent>();
@@ -45,6 +48,16 @@ public class Chef : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+        if(OnWall())
+        {
+            _ChefAnimator.SetBool("Climb",true);
+            _MeshTransform.localRotation = Quaternion.Euler(90,0,0);
+        }
+        else
+        {
+            _ChefAnimator.SetBool("Climb",false);
+            _MeshTransform.localRotation = Quaternion.Euler(0,0,0);
+        }
         switch(_state)
         {
             case ChefState.GoHome:
@@ -63,11 +76,10 @@ public class Chef : MonoBehaviour
                 
             case ChefState.Patrol:
                 _Crack = GetClosestAvailableCrack();
-                
                 if(_Crack != null) {
                     ChangeState(ChefState.GoToTarget);
                 }
-                else if (ReachedTarget(_PatrolWaypoint.transform.position))
+                if (ReachedTarget(_PatrolWaypoint.transform.position))
                 {
                     _PatrolWaypoint = GetNextPatrolTarget();
                     _NavAgent.SetDestination(_PatrolWaypoint.transform.position);
@@ -86,6 +98,7 @@ public class Chef : MonoBehaviour
                 if(_EatTimer < Time.time)
                 {
                     _Crack.UndoRepair();
+                    FMODUnity.RuntimeManager.PlayOneShot(ChefTakeNoodle);
                     _NavAgent.isStopped = false;
                     ChangeState(ChefState.Patrol);
                 } 
@@ -162,7 +175,6 @@ public class Chef : MonoBehaviour
     {
         float minDistance = 2f;
         float distance = (_targetPos - transform.position).magnitude;
-        Debug.Log(distance);
         return minDistance > distance; 
     }
 
@@ -177,11 +189,18 @@ public class Chef : MonoBehaviour
         _NavAgent.SetDestination(_HomePos);
     }
 
+    bool OnWall()
+    {
+       //Debug.Log("x " + transform.rotation.eulerAngles.x);
+        float minX = 0.1f;
+        return minX < transform.rotation.eulerAngles.x;//minY <transform.forward.y  || -minY > transform.forward.y ;
+    }
    private void OnTriggerEnter(Collider other) 
    {
        if(other.GetComponent<ArrowBehaviour>() != null)
        {
            _ChefAnimator.SetTrigger("Hit");
+           FMODUnity.RuntimeManager.PlayOneShot(ChefDie);
            _state = ChefState.Dead;
            _NavAgent.isStopped = true;
        }

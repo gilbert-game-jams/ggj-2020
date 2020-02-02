@@ -9,7 +9,8 @@ public class BowBehaviour : MonoBehaviour
 {
     public Animator _animator;
     [FMODUnity.EventRef] public string shootNoodleEvent;
-    private FMOD.Studio.EventInstance shootNoodleSoundEvent;
+    [FMODUnity.EventRef] public string chargeNoodleEvent;
+    private FMOD.Studio.EventInstance chargeNoodleSoundInstance;
 
     public GameObject _arrow;
     public GameObject _arrowSpawn;
@@ -41,7 +42,6 @@ public class BowBehaviour : MonoBehaviour
 
     private void Awake() {
         LoadArrow();
-        shootNoodleSoundEvent = FMODUnity.RuntimeManager.CreateInstance(shootNoodleEvent);
     }
 
     float GetArrowSpeed(float minSpeed, float maxSpeed, float draw) {
@@ -65,8 +65,6 @@ public class BowBehaviour : MonoBehaviour
 
     void FireArrow(float drawFactor, float maxSpeed)
     {
-        shootNoodleSoundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        shootNoodleSoundEvent.setParameterValue("BowChargeRelease", 1);
         var arrowSpawnTrans = _arrowSpawn.transform;
 
         _loadedArrow.GetComponent<Rigidbody>().useGravity = true;
@@ -106,14 +104,17 @@ public class BowBehaviour : MonoBehaviour
         _timeSinceArrowFired += Time.deltaTime;
         if (Input.GetMouseButtonUp(0) && _loadedArrow != null) 
         {
+            chargeNoodleSoundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            FMODUnity.RuntimeManager.PlayOneShot(shootNoodleEvent);
+
             FireArrow(_drawFactor, _maxArrowSpeed);
             ResetDraw();
             _animationState = AnimationState.Shooting;
             _timeSinceArrowFired = 0.0f;
         } 
         else if(Input.GetMouseButtonDown(1)) {
-            shootNoodleSoundEvent.start();
-            shootNoodleSoundEvent.setParameterValue("BowChargeRelease", 0);
+            chargeNoodleSoundInstance = FMODUnity.RuntimeManager.CreateInstance(chargeNoodleEvent);
+            chargeNoodleSoundInstance.start();
         } 
         else if (Input.GetMouseButton(1)) {
             _animationState = AnimationState.Drawing;
@@ -121,7 +122,7 @@ public class BowBehaviour : MonoBehaviour
             _drawFactor = _drawTime / _maxDrawTime;
         } else if(Input.GetMouseButtonUp(1)) {
             _animationState = AnimationState.Idle;
-            shootNoodleSoundEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            chargeNoodleSoundInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
 
         if(_loadedArrow == null && _animationState != AnimationState.Shooting && _timeSinceArrowFired > _reloadTime) {

@@ -81,10 +81,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6423486ac5d38134e9cd18f08d7eb512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChefSpawn: event:/Sounds/chefSpawn
+  ChefTakeNoodle: event:/Sounds/chefTakeNoodle
+  ChefDie: event:/Sounds/chefDie
   ChefManager: {fileID: 0}
   _TimeToEat: 5
   _ChefAnimator: {fileID: 6786237586615047626}
-  _MeshTransform: {fileID: 7417999106227830899}
+  _MeshTransform: {fileID: 3505925732550097072}
 --- !u!1001 &1139098594428009990
 PrefabInstance:
   m_ObjectHideFlags: 0
