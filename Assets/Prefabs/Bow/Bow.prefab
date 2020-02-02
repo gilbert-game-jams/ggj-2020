@@ -307,6 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 1665489619568021838}
   shootNoodleEvent: event:/Sounds/shootNoodle
+  chargeNoodleEvent: event:/Sounds/chargeNoodle
   _arrow: {fileID: 6186876585074684457, guid: 2be6b65fb6ef57b42b13bd90da33fee2, type: 3}
   _arrowSpawn: {fileID: 4390366367141213967}
   _minArrowSpeed: 5
